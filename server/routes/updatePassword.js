@@ -38,18 +38,5 @@ router.post("/api/customer/change", authorization, async (req, res) => {
             }
         }).lean()
     }
-    
-    /*user.findByIdAndUpdate({_id: req.user}, { first_name: firstName, last_name: lastName }, function (err, docs) {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.status(200).json({
-                "first_name": docs.first_name,
-                "last_name": docs.last_name,
-                "date_joined": docs.join_date,
-            })
-        }
-    }).lean();*/
 });
 module.exports = router;
