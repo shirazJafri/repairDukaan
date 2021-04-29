@@ -20,6 +20,7 @@ const port = process.env.PORT;
 app.use("", require("./routes/start"));
 app.use("",require("./routes/getProfile"));
 app.use("",require("./routes/updateProfile"));
+app.use("", require("./routes/updatePassword"));
 
 app.listen(port,() =>{
     console.log('server is working on port ',port);

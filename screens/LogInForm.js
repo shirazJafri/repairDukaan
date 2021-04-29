@@ -1,6 +1,7 @@
 import axios from "axios"
 import React, { useEffect } from "react"
 import {Text, View, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Alert} from "react-native"
+import AsyncStorage from '@react-native-community/async-storage'
 import { useState } from "react"
 
 export default function LogInForm( {navigation} ) {
@@ -11,9 +12,26 @@ export default function LogInForm( {navigation} ) {
       initialiseValues()
     }, [])*/
 
-    const initialiseValues = () => {
+    /*const initialiseValues = () => {
       setEmail("")
       setPassword("")
+    }*/
+
+    const initialEmail = {
+      email: ""
+    }
+
+    const initialPassword = {
+      password: ""
+    }
+
+    const storeToken = async (value) => {
+      try {
+        await AsyncStorage.setItem('token', value)
+      }
+      catch(error) {
+        console.log(error)
+      }
     }
 
     const handleLogIn = async () => {
@@ -21,11 +39,13 @@ export default function LogInForm( {navigation} ) {
             .then((response) => {
                 console.log(response)
                 if(response.data.token) {
-                  localStorage.setItem("token", response.data.token)
+                  storeToken(response.data.token)
                 }
                 Alert.alert('Log In Successful!')
-                initialiseValues()
-                navigation.navigate('Profile')
+                navigation.reset({
+                  index: 0,
+                  routes: [{ name: 'Profile' }],
+                });
             })
             .catch((error) => {
                 console.log(error)
@@ -42,6 +62,7 @@ export default function LogInForm( {navigation} ) {
             placeholder="Email" 
             placeholderTextColor="#003f5c"
             onChangeText = {setEmail}
+            keyboardType = 'email-address'
           />
       </View>
       <View style = {styles.inputView}>

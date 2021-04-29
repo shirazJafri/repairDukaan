@@ -3,6 +3,7 @@ import { StyleSheet, Text, Image, View, Alert, StatusBar} from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import logo from '../assets/Person.jpeg';
 import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function Profile() {
     const [first_name, setFname] = React.useState("");
@@ -12,21 +13,42 @@ export default function Profile() {
     React.useEffect(() => {
         handleLogIn();
     }, []);
+
+    const getToken = async () => {
+        try {
+            return await AsyncStorage.getItem('token')
+        }
+        catch(error) {
+            console.log(error)
+        }
+    }
+
+    var token;
+    var accessToken = getToken()
+    accessToken.then((response) => {
+        console.log(response)
+        token = response.toString()
+    })
+    accessToken.catch((error) => {
+        console.log(error)
+    })
+
     const handleLogIn = async () => {
         //console.log("hello");
-        await fetch("http://localhost:3000/api/customer/getprofile", {
+        await fetch("http://192.168.1.108:3000/api/customer/getprofile", {
             method: "GET",
-            headers: { token: localStorage.token }
+            headers: { "token" :   token }
         }).then((response) => response.json())
             //await axios.get('http://localhost:3000/api/customer/getprofile')
             .then((response) => {
                 setFname(response.first_name)
                 setLname(response.last_name)
                 setjoinedDate(response.date_joined)
-                Alert.alert('Joined Date retrieved')
+                Alert.alert(response)
                 console.log(response);
             })
             .catch((error) => {
+                console.log(headers.token)
                 console.log(error)
                 Alert.alert("Unsuccessful")
             })
