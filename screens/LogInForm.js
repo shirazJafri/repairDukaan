@@ -7,23 +7,14 @@ import { useState } from "react"
 export default function LogInForm( {navigation} ) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
-    /*useEffect(() => {
-      initialiseValues()
-    }, [])*/
-
-    /*const initialiseValues = () => {
-      setEmail("")
-      setPassword("")
-    }*/
-
-    const initialEmail = {
+    
+    /*const initialEmail = {
       email: ""
     }
 
     const initialPassword = {
       password: ""
-    }
+    }*/
 
     const storeToken = async (value) => {
       try {
@@ -42,16 +33,16 @@ export default function LogInForm( {navigation} ) {
                   storeToken(response.data.token)
                 }
                 Alert.alert('Log In Successful!')
-                navigation.reset({
-                  index: 0,
-                  routes: [{ name: 'Profile' }],
-                });
+                navigation.navigate(
+                  'Profile', {paramKey: response.data.token});
             })
             .catch((error) => {
                 console.log(error)
                 Alert.alert("Log In Unsuccessful!")
             })
     }
+
+
 
     return (
     <SafeAreaView style = {styles.container}>

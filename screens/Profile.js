@@ -5,7 +5,7 @@ import logo from '../assets/Person.jpeg';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 
-export default function Profile() {
+export default function Profile({route}) {
     const [first_name, setFname] = React.useState("");
     const [last_name, setLname] = React.useState("");
     const [joined_date, setjoinedDate] = React.useState("");
@@ -37,14 +37,14 @@ export default function Profile() {
         //console.log("hello");
         await fetch("http://192.168.1.108:3000/api/customer/getprofile", {
             method: "GET",
-            headers: { "token" :   token }
+            headers: { "token" :   route.params.paramKey }
         }).then((response) => response.json())
             //await axios.get('http://localhost:3000/api/customer/getprofile')
             .then((response) => {
                 setFname(response.first_name)
                 setLname(response.last_name)
                 setjoinedDate(response.date_joined)
-                Alert.alert(response)
+                //Alert.alert(response)
                 console.log(response);
             })
             .catch((error) => {
