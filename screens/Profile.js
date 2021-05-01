@@ -35,7 +35,7 @@ export default function Profile({route}) {
 
     const handleLogIn = async () => {
         //console.log("hello");
-        await fetch("http://192.168.1.108:3000/api/customer/getprofile", {
+        /*await fetch("http://192.168.1.108:3000/api/customer/getprofile", {
             method: "GET",
             headers: { "token" :   route.params.paramKey }
         }).then((response) => response.json())
@@ -49,6 +49,22 @@ export default function Profile({route}) {
             })
             .catch((error) => {
                 console.log(headers.token)
+                console.log(error)
+                Alert.alert("Unsuccessful")
+            })*/
+            await axios.get("http://192.168.1.108:3000/api/customer/getprofile", {
+                headers: {
+                    "token": route.params.paramKey
+                }
+            })
+            .then((response) => {
+                setFname(response.data.first_name)
+                setLname(response.data.last_name)
+                setjoinedDate(response.data.date_joined)
+                //Alert.alert(response)
+                console.log(response);
+            })
+            .catch((error) => {
                 console.log(error)
                 Alert.alert("Unsuccessful")
             })

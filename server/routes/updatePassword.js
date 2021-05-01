@@ -38,5 +38,13 @@ router.post("/api/customer/change", authorization, async (req, res) => {
             }
         }).lean()
     }
+    else {
+        return res.json({
+            "header": {
+                "error": 1
+            },
+            "message": "Passwords don't match!"
+        })
+    }
 });
 module.exports = router;
