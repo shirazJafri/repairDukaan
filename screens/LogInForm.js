@@ -1,51 +1,40 @@
 import axios from "axios"
 import React, { useEffect } from "react"
-import {Text, View, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Alert} from "react-native"
+import {Text, View, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, ActivityIndicator} from "react-native"
 import AsyncStorage from '@react-native-community/async-storage'
 import { useState } from "react"
+import { connect } from "react-redux"
+import {signIn} from '../redux'
 
-export default function LogInForm( {navigation} ) {
+function LogInForm( {authState, logIn, navigation} ) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    useEffect(() => {
+      if (authState.token) {
+        navigation.navigate('Profile')
+      }
+    }, [])
     
-    /*const initialEmail = {
-      email: ""
+  
+    console.log(authState)
+
+    if (authState.token) {
+      navigation.navigate('Profile')
     }
 
-    const initialPassword = {
-      password: ""
-    }*/
+    const handleLogIn = () => {
 
-    const storeToken = async (value) => {
-      try {
-        await AsyncStorage.setItem('token', value)
-      }
-      catch(error) {
-        console.log(error)
-      }
     }
-
-    const handleLogIn = async () => {
-        await axios.post('http://192.168.1.108:3000/login/customer', {email, password})
-            .then((response) => {
-                console.log(response)
-                if(response.data.token) {
-                  storeToken(response.data.token)
-                }
-                Alert.alert('Log In Successful!')
-                navigation.navigate(
-                  'Profile', {paramKey: response.data.token});
-            })
-            .catch((error) => {
-                console.log(error)
-                Alert.alert("Log In Unsuccessful!")
-            })
-    }
-
-
-
-    return (
-    <SafeAreaView style = {styles.container}>
+    
+    return authState.loading ? (
+      <View style = {styles.activity}>
+      <ActivityIndicator size="large" color="#00ff00" />
+      </View>
+    ) : authState.error ? (
+      <Text>{authState.error}</Text>
+    ) : (
+      <SafeAreaView style = {styles.container}>
     <Text style = {styles.logo}>Repair Dukaan</Text>
       <View style = {styles.inputView}>
           <TextInput  
@@ -65,7 +54,7 @@ export default function LogInForm( {navigation} ) {
             onChangeText = {setPassword}
           />
       </View>
-      <TouchableOpacity style={styles.loginBtn} onPress = {handleLogIn}>
+      <TouchableOpacity style={styles.loginBtn} onPress = {() => logIn(email, password)}>
           <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
 
@@ -75,6 +64,20 @@ export default function LogInForm( {navigation} ) {
       </SafeAreaView>
     )
 }
+
+
+const mapStateToProps = state => {
+  return {
+      authState: state
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+      logIn: (email, password) => dispatch(signIn(email, password))
+  }
+}
+
 
 const styles = StyleSheet.create({
     container: {
@@ -114,5 +117,11 @@ const styles = StyleSheet.create({
       },
       loginText:{
         color:"white"
+      },
+      activity: {
+        flex: 1,
+        justifyContent: "center"
       }
 })
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);

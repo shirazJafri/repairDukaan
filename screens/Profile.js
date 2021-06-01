@@ -4,8 +4,9 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import logo from '../assets/Person.jpeg';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
+import { connect } from 'react-redux';
 
-export default function Profile({route}) {
+function Profile({authState}) {
     const [first_name, setFname] = React.useState("");
     const [last_name, setLname] = React.useState("");
     const [joined_date, setjoinedDate] = React.useState("");
@@ -13,25 +14,6 @@ export default function Profile({route}) {
     React.useEffect(() => {
         handleLogIn();
     }, []);
-
-    const getToken = async () => {
-        try {
-            return await AsyncStorage.getItem('token')
-        }
-        catch(error) {
-            console.log(error)
-        }
-    }
-
-    var token;
-    var accessToken = getToken()
-    accessToken.then((response) => {
-        console.log(response)
-        token = response.toString()
-    })
-    accessToken.catch((error) => {
-        console.log(error)
-    })
 
     const handleLogIn = async () => {
         //console.log("hello");
@@ -54,7 +36,7 @@ export default function Profile({route}) {
             })*/
             await axios.get("http://192.168.1.108:3000/api/customer/getprofile", {
                 headers: {
-                    "token": route.params.paramKey
+                    "token": authState.token
                 }
             })
             .then((response) => {
@@ -87,6 +69,12 @@ export default function Profile({route}) {
     );
 }
 
+const mapStateToProps = state => {
+    return {
+        authState: state
+    }
+}
+
 const styles = StyleSheet.create({
     lineStyle: {
         borderBottomColor: "black",
@@ -106,3 +94,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
 });
+
+export default connect(mapStateToProps, null)(Profile);
+
