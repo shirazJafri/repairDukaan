@@ -19,12 +19,12 @@ export default function App() {
     <NavigationContainer>
       <Provider store = {store}>
         <Stack.Navigator>
-          <Stack.Screen name = "RatesScreen" component = {RatesScreen} />
-          {/*<Stack.Screen name = "LogIn" component = {LogInForm}/>
+          <Stack.Screen name = "LogIn" component = {LogInForm}/>
           <Stack.Screen name = "Profile" component = {Profile}/>
-          <Stack.Screen name = "RegisterScreen" component = {RegisterScreen} />
+          {/*<Stack.Screen name = "RegisterScreen" component = {RegisterScreen} />
           <Stack.Screen name = "UpdateScreen" component = {UpdateProfile} />
-          <Stack.Screen name = "UpdatePassword" component = {UpdatePassword} />*/}
+          <Stack.Screen name = "UpdatePassword" component = {UpdatePassword} />
+          <Stack.Screen name = "RatesScreen" component = {RatesScreen} />*/}
         </Stack.Navigator>
       </Provider>
     </NavigationContainer>

@@ -9,6 +9,7 @@ router.get("/api/customer/getprofile", authorization, (req, res) => {
 		}
 		else {
 			res.status(200).json({
+				"id": docs._id,
 				"first_name": docs.first_name,
 				"last_name": docs.last_name,
 				"date_joined": docs.join_date

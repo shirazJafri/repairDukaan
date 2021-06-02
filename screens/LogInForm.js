@@ -1,7 +1,5 @@
-import axios from "axios"
 import React, { useEffect } from "react"
-import {Text, View, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, ActivityIndicator} from "react-native"
-import AsyncStorage from '@react-native-community/async-storage'
+import {Text, View, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, ActivityIndicator, ToastAndroid} from "react-native"
 import { useState } from "react"
 import { connect } from "react-redux"
 import {signIn} from '../redux'
@@ -9,24 +7,12 @@ import {signIn} from '../redux'
 function LogInForm( {authState, logIn, navigation} ) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
-    useEffect(() => {
-      if (authState.token) {
-        navigation.navigate('Profile')
-      }
-    }, [])
-    
-  
     console.log(authState)
 
     if (authState.token) {
       navigation.navigate('Profile')
     }
 
-    const handleLogIn = () => {
-
-    }
-    
     return authState.loading ? (
       <View style = {styles.activity}>
       <ActivityIndicator size="large" color="#00ff00" />
@@ -68,7 +54,7 @@ function LogInForm( {authState, logIn, navigation} ) {
 
 const mapStateToProps = state => {
   return {
-      authState: state
+      authState: state.auth
   }
 }
 

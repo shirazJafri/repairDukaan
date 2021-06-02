@@ -71,7 +71,7 @@ function Profile({authState}) {
 
 const mapStateToProps = state => {
     return {
-        authState: state
+        authState: state.auth
     }
 }
 

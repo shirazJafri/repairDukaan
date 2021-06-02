@@ -16,21 +16,6 @@ function RatesScreen() {
             })
     }, [])
 
-    const DATA = [
-        {
-          id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-          title: 'First Item',
-        },
-        {
-          id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-          title: 'Second Item',
-        },
-        {
-          id: '58694a0f-3da1-471f-bd96-145571e29d72',
-          title: 'Third Item',
-        },
-      ];
-
       const Item = ({ repair_type, rateOfRepair }) => (
         <View style={styles.flatview}>
           <Text style={styles.name}>{repair_type}</Text>
@@ -65,14 +50,14 @@ function RatesScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 50,
+        //marginTop: 50,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
       },
       h2text: {
         marginTop: 10,
-        fontFamily: 'sans-serif',
+        fontFamily: 'serif',
         fontSize: 36,
         fontWeight: 'bold',
       },
@@ -93,5 +78,6 @@ const styles = StyleSheet.create({
         justifyContent: "center"
       }
 })
+
   
 export default RatesScreen;
