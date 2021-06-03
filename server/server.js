@@ -17,11 +17,20 @@ app.use('/', express.static(path.join(__dirname, 'static')))
 //ROUTES//
 //register and login routes
 const port = process.env.PORT;
+//const workersRouter = require('./routes/workers');
+const bookingsRouter = require('./routes/Bookings');
+const ContactRouter = require('./routes/Contact');
+const reportsRouter = require('./routes/Reports');
+
 app.use("", require("./routes/start"));
 app.use("",require("./routes/getProfile"));
 app.use("",require("./routes/updateProfile"));
 app.use("", require("./routes/updatePassword"));
 app.use("", require("./routes/rates"))
+//app.use('', workersRouter); 
+app.use('', bookingsRouter); 
+app.use('', ContactRouter); 
+app.use('', reportsRouter); 
 
 app.listen(port,() =>{
     console.log('server is working on port ',port);

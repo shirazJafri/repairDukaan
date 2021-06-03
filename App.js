@@ -9,6 +9,7 @@ import UpdatePassword from "./screens/UpdatePassword";
 import store from './redux/store';
 import {Provider} from 'react-redux'
 import RatesScreen from './screens/RatesScreen';
+import Contact from "./screens/Contact"
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export default function App() {
           <Stack.Screen name = "Profile" component = {Profile}/>
           <Stack.Screen name = "UpdatePassword" component = {UpdatePassword} />
           <Stack.Screen name = "UpdateScreen" component = {UpdateProfile} />
+          <Stack.Screen name= "ContactUs" component = {Contact} />
           {/*<Stack.Screen name = "RegisterScreen" component = {RegisterScreen} />
           <Stack.Screen name = "UpdateScreen" component = {UpdateProfile} />
           <Stack.Screen name = "UpdatePassword" component = {UpdatePassword} />
