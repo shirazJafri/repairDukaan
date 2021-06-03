@@ -11,7 +11,7 @@ function LogInForm( {authState, logIn, navigation} ) {
     console.log(authState)
 
     if (!authState.loading && authState.token) {
-      navigation.navigate('Profile')
+      navigation.navigate('DrawerNavigation')
     }
     else if (!authState.loading && authState.error) {
       Alert.alert('Unsuccessful Log-In!')

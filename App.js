@@ -13,6 +13,7 @@ import Contact from "./screens/Contact"
 import Report from './screens/Report';
 import Home from './screens/Home';
 import HowToUse from './screens/HowToUse'
+import DrawerNagivation from './screens/DrawerNagivation';
 
 const Stack = createStackNavigator();
 
@@ -24,14 +25,15 @@ export default function App() {
       <Provider store = {store}>
         <Stack.Navigator>
           <Stack.Screen name = "LogIn" component = {LogInForm}/>
-          <Stack.Screen name = "Profile" component = {Profile}/>
+          <Stack.Screen name = "DrawerNavigation" component = {DrawerNagivation} />
+          {/*<Stack.Screen name = "Profile" component = {Profile}/>
           <Stack.Screen name = "UpdatePassword" component = {UpdatePassword} />
           <Stack.Screen name = "UpdateScreen" component = {UpdateProfile} />
           <Stack.Screen name= "ContactUs" component = {Contact} />
           <Stack.Screen name = "Report" component = {Report} />
           <Stack.Screen name = "Home" component = {Home} />
           <Stack.Screen name = "HowToUse" component = {HowToUse} />
-          {/*<Stack.Screen name = "RegisterScreen" component = {RegisterScreen} />
+          <Stack.Screen name = "RegisterScreen" component = {RegisterScreen} />
           <Stack.Screen name = "UpdateScreen" component = {UpdateProfile} />
           <Stack.Screen name = "UpdatePassword" component = {UpdatePassword} />
           <Stack.Screen name = "RatesScreen" component = {RatesScreen} />*/}
