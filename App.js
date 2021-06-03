@@ -12,6 +12,7 @@ import RatesScreen from './screens/RatesScreen';
 import Contact from "./screens/Contact"
 import Report from './screens/Report';
 import Home from './screens/Home';
+import HowToUse from './screens/HowToUse'
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,7 @@ export default function App() {
           <Stack.Screen name= "ContactUs" component = {Contact} />
           <Stack.Screen name = "Report" component = {Report} />
           <Stack.Screen name = "Home" component = {Home} />
+          <Stack.Screen name = "HowToUse" component = {HowToUse} />
           {/*<Stack.Screen name = "RegisterScreen" component = {RegisterScreen} />
           <Stack.Screen name = "UpdateScreen" component = {UpdateProfile} />
           <Stack.Screen name = "UpdatePassword" component = {UpdatePassword} />

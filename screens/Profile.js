@@ -39,6 +39,7 @@ function Profile({authState, userState, getInfo, loggingOut, navigation}) {
                 <TouchableOpacity onPress = {() => navigation.navigate("ContactUs")}><Text>Contact</Text></TouchableOpacity>
                 <TouchableOpacity onPress = {() => navigation.navigate("Report")}><Text>Report</Text></TouchableOpacity>
                 <TouchableOpacity onPress = {() => navigation.navigate("Home")}><Text>Home</Text></TouchableOpacity>
+                <TouchableOpacity onPress = {() => navigation.navigate("HowToUse")}><Text>How To Use</Text></TouchableOpacity>
                 <StatusBar style="auto" />
             </View>
         </SafeAreaProvider>
