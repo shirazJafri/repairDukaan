@@ -1,5 +1,5 @@
 import axios from "axios"
-import { SIGN_IN_FAILURE, SIGN_IN_REQUEST, SIGN_IN_SUCCESS } from "./authTypes"
+import { LOG_OUT, SIGN_IN_FAILURE, SIGN_IN_REQUEST, SIGN_IN_SUCCESS } from "./authTypes"
 
 const signInRequest = () => {
     return {
@@ -20,6 +20,11 @@ const signInFailure = error => {
         payload: error
     }
 }
+const logOut = () => {
+    return {
+        type: LOG_OUT
+    }
+}
 
 export const signIn = (email, password) => {
     return (dispatch) => {
@@ -32,5 +37,11 @@ export const signIn = (email, password) => {
             .catch((error) => {
                 dispatch(signInFailure(error.message))
             })
+    }
+}
+
+export const signOut = () => {
+    return (dispatch) => {
+        dispatch(logOut())
     }
 }

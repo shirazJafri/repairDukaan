@@ -21,6 +21,8 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name = "LogIn" component = {LogInForm}/>
           <Stack.Screen name = "Profile" component = {Profile}/>
+          <Stack.Screen name = "UpdatePassword" component = {UpdatePassword} />
+          <Stack.Screen name = "UpdateScreen" component = {UpdateProfile} />
           {/*<Stack.Screen name = "RegisterScreen" component = {RegisterScreen} />
           <Stack.Screen name = "UpdateScreen" component = {UpdateProfile} />
           <Stack.Screen name = "UpdatePassword" component = {UpdatePassword} />

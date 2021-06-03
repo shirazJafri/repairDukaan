@@ -6,16 +6,20 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
 import { getUserInfo } from '../redux/user/userActions';
+import { TouchableOpacity } from 'react-native';
+import { signOut } from '../redux/auth/authActions';
 
-function Profile({authState, userState, getInfo}) {
+function Profile({authState, userState, getInfo, loggingOut, navigation}) {
     React.useEffect(() => {
         getInfo(authState.token)
-        setFname(userState.userInfo.first_name)
-        setLname(userState.userInfo.last_name)
-        setjoinedDate(userState.userInfo.date_joined)
     }, []);
 
     console.log(userState)
+
+    const handleLogOut = () => {
+        loggingOut()
+        navigation.navigate('LogIn')
+    }
     
     return !userState.loading && userState.userInfo ? (
         <SafeAreaProvider>
@@ -28,6 +32,9 @@ function Profile({authState, userState, getInfo}) {
                 <Text style={{ color: '#888', fontSize: 30, marginVertical: 0, textAlign: 'center' }}>RECENT BOOKINGS</Text>
                 <Text style={{ color: 'black', width: 300, fontSize: 22, borderWidth: 2, marginVertical: 20, textAlign: 'center' }}>31, January 2021 <Text style={{ color: "red", width: 350, fontSize: 22, borderWidth: 2, marginVertical: 20, textAlign: 'center' }}>  Rs. 61</Text></Text>
                 <Text style={{ color: 'black', width: 300, fontSize: 22, borderWidth: 2, borderColor: 'black', marginVertical: 0, textAlign: 'center' }}>1, Febuary 2021  <Text style={{ color: "red" }}>   Rs. 77</Text></Text>
+                <TouchableOpacity onPress = {() => navigation.navigate("UpdatePassword")}><Text>Update Password</Text></TouchableOpacity>
+                <TouchableOpacity onPress = {() => navigation.navigate("UpdateScreen")}><Text>Update Profile</Text></TouchableOpacity>
+                <TouchableOpacity onPress = {handleLogOut}><Text>LOGOUT</Text></TouchableOpacity>
                 <StatusBar style="auto" />
             </View>
         </SafeAreaProvider>
@@ -45,7 +52,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getInfo: (tokenVal) => dispatch(getUserInfo(tokenVal))
+        getInfo: (tokenVal) => dispatch(getUserInfo(tokenVal)),
+        loggingOut: () => dispatch(signOut())
     }
 }
 

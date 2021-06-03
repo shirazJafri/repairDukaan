@@ -3,22 +3,24 @@ import {Text, View, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Activ
 import { useState } from "react"
 import { connect } from "react-redux"
 import {signIn} from '../redux'
+import { Alert } from "react-native"
 
 function LogInForm( {authState, logIn, navigation} ) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     console.log(authState)
 
-    if (authState.token) {
+    if (!authState.loading && authState.token) {
       navigation.navigate('Profile')
+    }
+    else if (!authState.loading && authState.error) {
+      Alert.alert('Unsuccessful Log-In!')
     }
 
     return authState.loading ? (
       <View style = {styles.activity}>
       <ActivityIndicator size="large" color="#00ff00" />
       </View>
-    ) : authState.error ? (
-      <Text>{authState.error}</Text>
     ) : (
       <SafeAreaView style = {styles.container}>
     <Text style = {styles.logo}>Repair Dukaan</Text>

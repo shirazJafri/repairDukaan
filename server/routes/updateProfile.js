@@ -4,10 +4,10 @@ const user = require("../models/User")
 //const authorization = require("../middleware/authorization");
 //const { Router } = require("express");
 
-router.post("/api/user/updateprofile", (req, res) => {
-    const { testID, firstName, lastName } = req.body;
+router.put("/api/user/updateprofile/:id", (req, res) => {
+    const { firstName, lastName } = req.body;
 
-    user.findByIdAndUpdate(testID, { first_name: firstName, last_name: lastName }, function (err, docs) {
+    user.findByIdAndUpdate(req.params.id, { first_name: firstName, last_name: lastName }, {new: true}, function (err, docs) {
         if (err) {
             console.log(err);
         }
@@ -15,7 +15,6 @@ router.post("/api/user/updateprofile", (req, res) => {
             res.status(200).json({
                 "first_name": docs.first_name,
                 "last_name": docs.last_name,
-                "date_joined": docs.join_date,
             })
         }
     }).lean();

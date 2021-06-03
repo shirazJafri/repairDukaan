@@ -2,19 +2,22 @@ import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, SafeAreaView, TextInput, Text, Alert, View, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Button } from 'react-native-elements';
-//const Registerapi = axios.create({baseURL:'http://localhost:3000/signup/customer'});
 import axios from "axios"
+import { connect } from 'react-redux';
+import {getUserInfo} from '../redux/user/userActions'
 
-export default function UpdateProfile({ navigation }) {
+function UpdateProfile({ authState, userState, navigation, getInfo }) {
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
 
-    /*useEffect({
-        handleGetProfile();
+    useEffect(() => {
+        setFirstName(userState.userInfo.first_name)
+        setLastName(userState.userInfo.last_name)
+        setPhoneNumber(userState.userInfo.phone_number)
     }, []);
 
-    const handleGetProfile = async () => {
+    /*const handleGetProfile = async () => {
         await fetch("http://localhost:3000/api/customer/getprofile", {
             method: "GET",
             headers: { token: localStorage.token }
@@ -30,8 +33,19 @@ export default function UpdateProfile({ navigation }) {
         })
     }*/
 
-    const handleUpdate = async () => {
-
+    const handleUpdate =   () => {
+        axios.put(`http://192.168.1.108:3000/api/user/updateprofile/${userState.userInfo.id}`, {firstName, lastName})
+        .then((response) => {
+            console.log(response)
+            Alert.alert("Sucessful update!")
+            getInfo(authState.token)
+            navigation.navigate("Profile")
+        })
+        .catch((error) => {
+            console.log(error)
+            Alert.alert("Unsuccessful!")
+            navigation.navigate("Profile")
+        })
     }
 
 
@@ -113,3 +127,18 @@ const styles = StyleSheet.create({
         color:"white"
       }
 })
+
+const mapStateToProps = state => {
+    return {
+        authState: state.auth,
+        userState: state.user
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getInfo: (tokenVal) => dispatch(getUserInfo(tokenVal))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateProfile)

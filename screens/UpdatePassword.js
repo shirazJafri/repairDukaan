@@ -1,15 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, SafeAreaView, TextInput, Text, Alert, View, Image, TouchableOpacity } from 'react-native';
 import axios from 'axios'
+import { connect } from 'react-redux';
 
-export default function UpdatePassword({ route, navigation }) {
+function UpdatePassword({ authState, navigation }) {
     const [currentPassword, setCurrentPassword] = useState("")
     const [newPassword, setNewPassword] = useState("")
 
     const handleUpdatePassword = async () => {
         await axios.post("http://192.168.1.108:3000/api/customer/change", {currentPassword, newPassword}, {
             headers: {
-                "token": route.params.token
+                "token": authState.token
             }
         })
         .then((response) => {
@@ -91,3 +92,11 @@ const styles = StyleSheet.create({
         color:"white"
       }
 })
+
+const mapStateToProps = state => {
+    return {
+        authState: state.auth
+    }
+}
+
+export default connect(mapStateToProps, null)(UpdatePassword);
