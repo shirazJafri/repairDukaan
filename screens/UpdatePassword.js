@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { StyleSheet, SafeAreaView, TextInput, Text, Alert, View, Image, TouchableOpacity } from 'react-native';
 import axios from 'axios'
 import { connect } from 'react-redux';
+import {signOut} from "../redux/auth/authActions"
 
-function UpdatePassword({ authState, navigation }) {
+function UpdatePassword({ authState, navigation, loggingOut }) {
     const [currentPassword, setCurrentPassword] = useState("")
     const [newPassword, setNewPassword] = useState("")
 
@@ -14,9 +15,10 @@ function UpdatePassword({ authState, navigation }) {
             }
         })
         .then((response) => {
-            Alert.alert('Change of Password Successful!')
+            Alert.alert('Change of Password Successful! Please re-login!')
+            loggingOut()
             console.log(response.data.message);
-            navigation.navigate('Profile')
+            navigation.navigate('LogIn')
         })
         .catch((error) => {
             Alert.alert("Change of Password Unsuccessful!")
@@ -34,6 +36,7 @@ function UpdatePassword({ authState, navigation }) {
                     placeholder = 'Current Password'
                     placeholderTextColor="#003f5c"
                     onChangeText={setCurrentPassword}
+                    secureTextEntry = {true}
                 />
             </View>
             <View style={styles.inputView}>
@@ -43,6 +46,7 @@ function UpdatePassword({ authState, navigation }) {
                     placeholder = 'New Password'
                     placeholderTextColor="#003f5c"
                     onChangeText={setNewPassword}
+                    secureTextEntry = {true}
                 />
             </View>
             <TouchableOpacity style={styles.loginBtn} onPress={handleUpdatePassword}>
@@ -99,4 +103,10 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, null)(UpdatePassword);
+const mapDispatchToProps = dispatch => {
+    return {
+        loggingOut: () => dispatch(signOut())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdatePassword);

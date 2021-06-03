@@ -20,6 +20,7 @@ function Profile({authState, userState, getInfo, loggingOut, navigation}) {
         loggingOut()
         navigation.navigate('LogIn')
     }
+
     
     return !userState.loading && userState.userInfo ? (
         <SafeAreaProvider>
