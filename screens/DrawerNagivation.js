@@ -12,10 +12,13 @@ import Report from './Report';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import Map from './Map'
+import Inprogress from './Inprogress'
+import Tracker from './Tracker'
 
 
 
-
+const MapStack = createStackNavigator();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -44,7 +47,7 @@ const NavigationDrawerStructure = (props) => {
 
 function ContactStack({ navigation }) {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator>
       <Stack.Screen
         name="Contact"
         component={Contact}
@@ -72,7 +75,7 @@ function ContactStack({ navigation }) {
 
 function HowToUseStack({ navigation }) {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator>
       <Stack.Screen
         name="How To Use"
         component={HowToUse}
@@ -100,7 +103,7 @@ function HowToUseStack({ navigation }) {
 
 function RatesStack({ navigation }) {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator>
       <Stack.Screen
         name="Rates"
         component={Rates}
@@ -128,7 +131,7 @@ function RatesStack({ navigation }) {
 
 function ReportStack({ navigation }) {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator>
       <Stack.Screen
         name="Report"
         component={Report}
@@ -183,14 +186,33 @@ function ReportStack({ navigation }) {
 }*/
 
 
-
+const MapStackScreen = ({navigation}) => (
+  <MapStack.Navigator screenOptions={{
+          headerStyle: {
+          backgroundColor: '#009387',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+          fontWeight: 'bold'
+          }
+      }}>
+          <MapStack.Screen name="Map" component={Map} options={{
+          title:'         RepairDukaan',
+          }} />
+                <MapStack.Screen name="Tracker"  component = {Tracker} options={{
+          title:'         RepairDukaan',
+          }} />
+          <MapStack.Screen name="Inprogress"  component = {Inprogress} options={{
+          title:'         RepairDukaan',
+          }} />
+  </MapStack.Navigator>
+  );
 
 
 
 function HomeStack({ navigation }) {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
       screenOptions={{
         headerLeft: () => (
           <NavigationDrawerStructure navigationProps={navigation} />
@@ -220,14 +242,11 @@ function HomeStack({ navigation }) {
 
 
 
+
 export default function DrawerNagivation() {
-
-
-  
-
   return (
      <SafeAreaProvider>
-      <Drawer.Navigator>
+      <Drawer.Navigator initialRouteName = {Home}>
         <Drawer.Screen
           name="Home"
           options={{ drawerLabel: 'Home' }}
@@ -252,6 +271,11 @@ export default function DrawerNagivation() {
           name="Contact"
           options={{ drawerLabel: 'Contact' }}
           component={ContactStack}
+        />
+        <Drawer.Screen
+          name = "Map"
+          options = {{drawerLabel: 'Map'}}
+          component = {MapStackScreen}
         />
       </Drawer.Navigator>    
   

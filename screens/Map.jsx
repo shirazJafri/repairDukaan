@@ -3,20 +3,18 @@ import {Platform,SafeAreaView,View,TextInput,Text, StyleSheet,Image,Alert, Touch
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import  Constants from 'expo-constants';
 import * as Location from 'expo-location';
-import Geocoder from 'react-native-geocoding'
-import * as Permissions from 'expo-permissions';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 const KEY = "WlOfHKQSbaBfAafAodbzvfccj8QYGLtK"
 const user_id = "602d9002022d673150ce8a28"
 const repair_type = "Car"
 import axios from 'axios'
-import Tracker from './Tracker';
 import { LogBox } from 'react-native';
+import { connect } from 'react-redux';
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
   'Require cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle.'
 ]);
-const Delivery = ({navigation}) =>{
+const Delivery = ({navigation, userState}) =>{
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [log,setlog] = useState(false);
@@ -29,7 +27,7 @@ const Delivery = ({navigation}) =>{
 })
 const handleSubmit = () =>{
   //let adr = getaddress(region.latitude,region.longitude)
-  axios.post('http://192.168.0.109:3000/user/submit',{user_id,location:{latitude:region.latitude,longitude:region.longitude},repair_type}).then((res) => {
+  axios.post('https://enigmatic-mesa-42065.herokuapp.com/user/submit',{user_id: userState.userInfo.id,location:{latitude:region.latitude,longitude:region.longitude},repair_type}).then((res) => {
       if(res.data.status == "Sorry No worker Available"){
         Alert.alert("No worker Available")
       }
@@ -126,4 +124,11 @@ const getaddress = async (lat,lng) =>{
       justifyContent:"center",
     }
   });
-  export default Delivery; 
+
+  const mapStateToProps = state => {
+    return {
+      userState: state.user
+    }
+  }
+
+  export default connect(mapStateToProps, null)(Delivery); 

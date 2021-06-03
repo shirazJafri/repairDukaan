@@ -1,11 +1,8 @@
 import React,{useState,useEffect} from 'react';
-import CountdownBar from "react-native-countdown-bar";   
 import {View, Text,Animated,StyleSheet,Button,Alert} from 'react-native'
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
-import { ProgressBar, Colors } from 'react-native-paper';
 import Constants from 'expo-constants';
 import axios from 'axios';
-import Delivery from './Map';
 import { LogBox } from 'react-native';
 
 LogBox.ignoreLogs([
@@ -25,7 +22,7 @@ const Tracker = ({route,navigation}) => {
  // console.log(worker_id)
   const [wname,setWname] = useState("");
   const getname = async() =>{
-    await axios.post('http://192.168.0.109:3000/worker/info',{worker_id}).then((res) =>{
+    await axios.post('https://enigmatic-mesa-42065.herokuapp.com/worker/info',{worker_id}).then((res) =>{
      setWname(res.data.first_name);
      // console.log(res.data);
     }).catch((err) => {
@@ -34,7 +31,7 @@ const Tracker = ({route,navigation}) => {
   }
   const handleArrived = async() =>{
    // console.log("hello")
-     await axios.post('http://192.168.0.109:3000/user/status',{repair_id}).then((res) =>{
+     await axios.post('https://enigmatic-mesa-42065.herokuapp.com/user/status',{repair_id}).then((res) =>{
        if(res.data.status == "Repair Started"){
         navigation.navigate("Inprogress",{repair_id:repair_id})}
      }).catch((err) => {

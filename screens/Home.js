@@ -4,18 +4,20 @@ import React from 'react';
 import { StyleSheet,SafeAreaView, Text, TouchableOpacity, View, Image } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import car from '../assets/car.jpeg';
-import bike from '../assets/bike.jpeg';
-import display from '../assets/display.png';
+//import car from '../assets/car.jpeg';
+//import bike from '../assets/bike.jpeg';
+//import display from '../assets/display.png';
 import axios from 'axios';
 import Report from './Report'
+import { connect } from 'react-redux';
 const dateFormat = require('dateformat');
+import {getUserInfo} from '../redux/user/userActions'
 
 //const router = require('express').Router();
 
 
 
-export default function Home({ navigation }) {
+function Home({ navigation, authState, userState, getInfo }) {
 
   /*router.route('/getBooking/:id').get((req, res) => {
     Bookings.findById(req.params.id)
@@ -47,6 +49,7 @@ export default function Home({ navigation }) {
 
   React.useEffect(() => {
     handleLogIn();
+    getInfo(authState.token)
   }, []);
   
   const handleLogIn = async () => {
@@ -85,13 +88,6 @@ export default function Home({ navigation }) {
 
               }
           }
-             
-              
-          
-                
-            
-
-            
             //Alert.alert(response)
             console.log(response);
         })
@@ -105,13 +101,13 @@ export default function Home({ navigation }) {
   return (
      <SafeAreaProvider>
      <View style={styles.container}>
-     <Text style = {{fontSize : 25, textAlign : 'center', color :'#364f6b', fontWeight: 'bold', marginVertical: 20 }}>BOOK A CAR OR BIKE MECHANIC</Text>
-     <View style = {{flexDirection : 'row'}}><Image source={car} style={{ width: 150, height: 120}} /><Image source={bike} style={{ width: 150, height: 120}} /></View>
+     <Text style = {{textAlign : 'center', color :'#364f6b', fontWeight: 'bold', marginVertical: 20 }}>BOOK A CAR OR BIKE MECHANIC</Text>
+     <View style = {{flexDirection : 'row'}}><Image source={{uri: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2Fyc3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80'}} style={{ width: 150, height: 120}} />{/*<Image source={bike} style={{ width: 150, height: 120}} />*/}</View>
      <TouchableOpacity onPress={() => {navigation.navigate('Contact')}} style={styles.button}>
          <Text style={styles.buttonText}>BOOK NOW</Text>
        </TouchableOpacity>
-       {Current == true ? <Image source={display} style={{ width: 300, height: 200}} /> : <View style = {{flexDirection : 'row'}}><Text style = {{color : '#364f6b' , width: 300, fontSize : 22, fontWeight : 'bold', borderWidth: 3, borderColor: '#3cb371', borderRadius: 15, backgroundColor : '#fff', marginVertical: 20, textAlign : 'left'}}> <MaterialCommunityIcons name="clock-check-outline" color= 'black' size= '10' /> Current Request {"\n"} <MaterialCommunityIcons name="calendar" color= 'black' size= '10' /> {date} {'\n'} <MaterialCommunityIcons name="map-marker" color= 'black' size= '10' /> {Location}{'\n'} <MaterialCommunityIcons name="cash-register" color= 'black' size= '10' /> PKR {Fare}</Text></View>}
-       {Past == true ? null : <View style = {{flexDirection : 'row'}}><Text style = {{color : '#364f6b' , width: 300, fontSize : 22, fontWeight : 'bold', borderWidth: 3, borderColor: '#98fb98', borderRadius: 15, backgroundColor : '#fff',  marginVertical: 0, textAlign : 'left'}}> <MaterialCommunityIcons name="clock-check-outline" color= 'black' size= '10'  /> Past Requests{"\n"} <MaterialCommunityIcons name="calendar" color= 'black' size= '10' /> {date2}{'\n'} <MaterialCommunityIcons name="map-marker" color= 'black' size= '10' /> {Location2}{'\n'} <MaterialCommunityIcons name="cash-register" color= 'black' size= '10' /> EXPECTED PKR {Fare2}</Text></View>}    
+       {Current == true ? {/*<Image source={display} style={{ width: 300, height: 200}} />*/} : <View style = {{flexDirection : 'row'}}><Text style = {{color : '#364f6b' , width: 300, fontWeight : 'bold', borderWidth: 3, borderColor: '#3cb371', borderRadius: 15, backgroundColor : '#fff', marginVertical: 20, textAlign : 'left'}}>Current Request {"\n"}  {date} {'\n'}  {Location}{'\n'}  PKR {Fare}</Text></View>}
+       {Past == true ? null : <View style = {{flexDirection : 'row'}}><Text style = {{color : '#364f6b' , width: 300, fontWeight : 'bold', borderWidth: 3, borderColor: '#98fb98', borderRadius: 15, backgroundColor : '#fff',  marginVertical: 0, textAlign : 'left'}}>  Past Requests{"\n"}  {date2}{'\n'}  {Location2}{'\n'}  EXPECTED PKR {Fare2}</Text></View>}    
           
        
 
@@ -139,8 +135,22 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   buttonText: {
-    fontSize: 20,
     color: '#fff',
     fontWeight: 'bold'
   }, 
 });
+
+const mapStateToProps = state => {
+  return {
+    authState: state.auth,
+    userState: state.user
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getInfo: (tokenVal) => dispatch(getUserInfo(tokenVal))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
