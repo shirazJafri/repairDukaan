@@ -21,6 +21,7 @@ const Tracker = ({route,navigation}) => {
   const worker_id = route.params.worker_id;
  // console.log(worker_id)
   const [wname,setWname] = useState("");
+  const [move,setMove] = useState(false);
   const getname = async() =>{
     await axios.post('https://enigmatic-mesa-42065.herokuapp.com/worker/info',{worker_id}).then((res) =>{
      setWname(res.data.first_name);
@@ -30,17 +31,18 @@ const Tracker = ({route,navigation}) => {
      });
   }
   const handleArrived = async() =>{
-   // console.log("hello")
+   //console.log("hello")
      await axios.post('https://enigmatic-mesa-42065.herokuapp.com/user/status',{repair_id}).then((res) =>{
        if(res.data.status == "Repair Started"){
-        navigation.navigate("Inprogress",{repair_id:repair_id})}
+         setMove(true);
+        }
      }).catch((err) => {
          console.log(err);
      })
    }
   useEffect(() => {
     getname();
-    var handle=setInterval(handleArrived,1000);    
+    var handle=setInterval(handleArrived,10000);    
   })
 
   const handleCancel = async () =>{
@@ -62,7 +64,9 @@ const Tracker = ({route,navigation}) => {
     setTime(t)
 }
 //handleArrived();
-
+if(move){
+  navigation.navigate("Inprogress",{repair_id:repair_id})
+}
   return (
     <View style={styles.container}>
       <Text>Your Mechanic {wname} is Arrivng Soon</Text>
