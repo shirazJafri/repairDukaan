@@ -2,21 +2,20 @@ import React, { useEffect } from "react"
 import {Text, View, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, ActivityIndicator, ToastAndroid} from "react-native"
 import { useState } from "react"
 import { connect } from "react-redux"
-import {signIn} from '../redux'
+import {signIn, signOut} from '../redux'
 import { Alert } from "react-native"
 
-function LogInForm( {authState, logIn, navigation} ) {
+function LogInForm( {authState, logIn,loggingOut, navigation} ) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     console.log(authState)
-
     if (!authState.loading && authState.token) {
-      navigation.navigate('DrawerNavigation')
+      navigation.navigate('SplashScreen')
     }
-    else if (!authState.loading && authState.error) {
-      Alert.alert('Unsuccessful Log-In!')
+    else if(!authState.loading && authState.error){
+      Alert.alert('Login Unsuccessful');
+      loggingOut();
     }
-
     return authState.loading ? (
       <View style = {styles.activity}>
       <ActivityIndicator size="large" color="#00ff00" />
@@ -62,7 +61,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      logIn: (email, password) => dispatch(signIn(email, password))
+      logIn: (email, password) => dispatch(signIn(email, password)),
+      loggingOut:() => dispatch(signOut())
   }
 }
 
@@ -113,3 +113,4 @@ const styles = StyleSheet.create({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);
+
