@@ -3,111 +3,145 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet,SafeAreaView, Text, TouchableOpacity, View, Image } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-//import car from '../assets/car.jpeg';
-//import bike from '../assets/bike.jpeg';
-//import display from '../assets/display.png';
 import axios from 'axios';
-import Report from './Report'
-import { connect } from 'react-redux';
+import Report from './Report';
+import { ScrollView } from 'react-native';
 const dateFormat = require('dateformat');
-import {getUserInfo} from '../redux/user/userActions'
-
-//const router = require('express').Router();
-
-
-
-function Home({ navigation, authState, userState, getInfo }) {
-
-  /*router.route('/getBooking/:id').get((req, res) => {
-    Bookings.findById(req.params.id)
-      .then(Bookings => res.json(Bookings))
-      .catch(err => res.status(400).json('Error: ' + err));
-  });*/
-
+import {getUserInfo} from '../redux/user/userActions';
+import {connect} from 'react-redux'
+function Home({ authState, userState, navigation }) {
+  var c1 = 0;
+  var c2 = 0;
   const [ID, setID] = React.useState("");
   const [Type, setType] = React.useState("");
-  const [Location, setLocation] = React.useState("");
+  const [Lati, setLati] = React.useState("");
+  const [Longi, setLongi] = React.useState("");
+  const [Lati2, setLati2] = React.useState("");
+  const [Longi2, setLongi2] = React.useState("");
   const [date, setDate] = React.useState("");
   const [Fare, setFare] = React.useState("");
+  const [date2, setDate2] = React.useState("");
+  const [Fare2, setFare2] = React.useState("");
   const [Status, setStatus] = React.useState("");
   const [Email, setEmail] = React.useState("");
-
   const [ID2, setID2] = React.useState("");
   const [Type2, setType2] = React.useState("");
   const [Location2, setLocation2] = React.useState("");
-  const [date2, setDate2] = React.useState("");
-  const [Fare2, setFare2] = React.useState("");
   const [Status2, setStatus2] = React.useState("");
   const [Email2, setEmail2] = React.useState("");
-
   const [Current, setCurrent] = React.useState(false);
   const [Past, setPast] = React.useState(false);
-
-
-
-
+  const[Street1, setStreet1] =React.useState("");
+  const[Street2, setStreet2] =React.useState("");
+  const KEY = "ANRBXbTPpZSwrjbpSl4iIOxqRe2vUlpA";
+  const [repair_id, setRepair] = React.useState("");
+  const [ButtonS, setButtonS] = React.useState(true);
   React.useEffect(() => {
-    handleLogIn();
-    getInfo(authState.token)
-  }, []);
-  
+      const unsubscribe = navigation.addListener('focus', () => {
+        handleLogIn();
+      });
+      return unsubscribe;
+    }, [navigation]);
+ 
+ //s console.log("hello")
+  const handleArrived = async() =>{
+    //  ("hello")
+      await axios.post('https://enigmatic-mesa-42065.herokuapp.com/user/status',{repair_id}).then((res) =>{
+          setStatus(res.data.status)
+          if (res.data.status == "Completed" || res.data.status == "Cancelled"){
+            setCurrent(false)
+          }
+          
+      }).catch((err) => {
+           (err);
+      })
+    }
+  const getaddress = async (lat,lng) =>{
+    var addressComponent
+      await axios.get( 
+       "http://www.mapquestapi.com/geocoding/v1/reverse?key="+KEY+"&location="+lat+","+lng+"&includeRoadMetadata=true&includeNearestIntersection=true",
+        {
+          headers: {
+            "Content-type": "application/json"
+          }
+        }
+      ).then(
+        (response) => {
+          //("Hello")
+          ////(response.data)
+          ////(response.data.results[0].locations[0].street);
+          
+          setStreet1(response.data.results[0].locations[0].street)
+          setStreet2(response.data.results[0].locations[0].street)
+        }
+      )
+     }
   const handleLogIn = async () => {
-    
-        await axios.get("http://192.168.1.108:3000/getBooking/email@hotmail.com", {
+    setCurrent(false);
+    setButtonS(true);
+    //console.log(userState.userInfo.id);
+        await axios.get(`https://enigmatic-mesa-42065.herokuapp.com/repair/get/${userState.userInfo.id}`, {
         })
         .then((response) => {
-
           var data = response.data;
-
+          console.log(data);
           for (var i = 0; i < data.length; i++){
-              if (data[i].Status == 1){
-
-                setID(data[i].ID)
-                setType(data[i].Type)
-                setLocation(data[i].Location)
+            if (data[i].status == "Completed" || data[i].status == "Cancelled"){
+              setLati2(data[i].location.latitude)
+              setLongi2(data[i].location.longitude)
+              setDate2(dateFormat(data[i].date, "ddd mmm dd yyyy" ))
+              setFare2(data[i].amount)
+              setStatus2(data[i].status)
+              ////(Lati, Longi)
+             // getaddress(data[i].location.latitude, data[i].location.longitude);
+              setPast(true)
+            }
+            else {   
+                setLati(data[i].location.latitude)
+                setLongi(data[i].location.longitude)
                 setDate(dateFormat(data[i].date, "ddd mmm dd yyyy" ))
-                setFare(data[i].Fare)
-                setStatus(data[i].Status)
-                setEmail(data[i].Email)
-
-                setCurrent(Current)
-              }
-
-              if (data[i].Status == 0){
-
-                setID2(data[i].ID)
-                setType2(data[i].Type)
-                setLocation2(data[i].Location)
-                setDate2(dateFormat(data[i].date, "ddd mmm dd yyyy" ))
-                setFare2(data[i].Fare)
-                setStatus2(data[i].Status)
-                setEmail2(data[i].Email)
-
-                setPast(Past)
-
-              }
+                setFare(data[i].amount)
+                setStatus(data[i].status)
+                setRepair(data[i]._id)
+                ////(Lati, Longi)
+               // getaddress(data[i].location.latitude, data[i].location.longitude);
+                setCurrent(true)
+                setButtonS(false) 
+            }
+           
           }
-            //Alert.alert(response)
-            console.log(response);
+          //(response);
         })
         .catch((error) => {
-            console.log(error)
+            //(error)
             //Alert.alert("Unsuccessful")
         })
 }
-  
-
-  return (
+//
+//(Current)
+//(Past)
+  return !userState.loading && userState.userInfo ? 
+  (
      <SafeAreaProvider>
+       <ScrollView>
      <View style={styles.container}>
-     <Text style = {{textAlign : 'center', color :'#364f6b', fontWeight: 'bold', marginVertical: 20 }}>BOOK A CAR OR BIKE MECHANIC</Text>
-     <View style = {{flexDirection : 'row'}}><Image source={{uri: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2Fyc3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80'}} style={{ width: 150, height: 120}} />{/*<Image source={bike} style={{ width: 150, height: 120}} />*/}</View>
-     <TouchableOpacity onPress={() => {navigation.navigate('Contact')}} style={styles.button}>
+     <Text style = {{ textAlign : 'center', fontSize : 27, color :'#364f6b', fontWeight: 'bold', marginVertical: 20 }}>BOOK A CAR OR BIKE MECHANIC</Text>
+     <View style = {{flexDirection : 'row'}}><Image
+    
+        source={{ uri: "https://i.ibb.co/dkL4G53/bike.jpg"}}
+        style = {{width : 110, height : 110, marginHorizontal : 15}}
+      />
+     <Image
+    
+    source={{ uri: "https://i.ibb.co/6PWQLw8/car.jpg"}}
+    style = {{width : 110, height : 110}}
+  />
+      </View>
+     {ButtonS == true ? <TouchableOpacity onPress={() => {}}   style={styles.button}>
          <Text style={styles.buttonText}>BOOK NOW</Text>
-       </TouchableOpacity>
-       {Current == true ? {/*<Image source={display} style={{ width: 300, height: 200}} />*/} : <View style = {{flexDirection : 'row'}}><Text style = {{color : '#364f6b' , width: 300, fontWeight : 'bold', borderWidth: 3, borderColor: '#3cb371', borderRadius: 15, backgroundColor : '#fff', marginVertical: 20, textAlign : 'left'}}>Current Request {"\n"}  {date} {'\n'}  {Location}{'\n'}  PKR {Fare}</Text></View>}
-       {Past == true ? null : <View style = {{flexDirection : 'row'}}><Text style = {{color : '#364f6b' , width: 300, fontWeight : 'bold', borderWidth: 3, borderColor: '#98fb98', borderRadius: 15, backgroundColor : '#fff',  marginVertical: 0, textAlign : 'left'}}>  Past Requests{"\n"}  {date2}{'\n'}  {Location2}{'\n'}  EXPECTED PKR {Fare2}</Text></View>}    
+       </TouchableOpacity> : null}
+       {Current == true ? <View style = {{flexDirection : 'row'}}><TouchableOpacity onPress={() =>{}}><Text style = {{color : '#364f6b' , width: 300, fontWeight : 'bold', fontSize : 25, borderWidth: 3, borderColor: '#3cb371', borderRadius: 15, backgroundColor : '#fff', marginVertical: 20, textAlign : 'left'}}>  Current Request {"\n"}  {date} {'\n'}  {Street1} {'\n'} {Status} {'\n'}  EXPECTED PKR {Fare}</Text></TouchableOpacity></View> : <Image source={{uri : "https://i.ibb.co/hsqMvdn/display.png"}} style={{ width: 300, height: 200}} />}
+       {Past == true ? <View style = {{flexDirection : 'row'}}><Text style = {{color : '#364f6b' , width: 300, fontWeight : 'bold', fontSize : 25, borderWidth: 3, borderColor: '#98fb98', borderRadius: 15, backgroundColor : '#fff',  marginVertical: 0, textAlign : 'left'}}>  Past Request{"\n"}  {date2}{'\n'}  {Street2}{'\n'}  {Status2} {'\n'} PKR {Fare2}</Text></View> :  <Image source={{uri : "https://i.ibb.co/hsqMvdn/display.png"}} style={{ width: 300, height: 200}} />}    
           
        
 
@@ -115,10 +149,13 @@ function Home({ navigation, authState, userState, getInfo }) {
        
       
      </View>
+     </ScrollView>
      </SafeAreaProvider>  
   
 
-  );
+  ) : (
+    <Text>Loading</Text>
+  )
   
 }
 
@@ -135,22 +172,21 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   buttonText: {
+    fontSize : 20,
     color: '#fff',
     fontWeight: 'bold'
   }, 
+ 
 });
-
-const mapStateToProps = state => {
-  return {
-    authState: state.auth,
-    userState: state.user
+const mapStateToProps = state =>{
+  return{
+    authState:state.auth,
+    userState:state.user
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    getInfo: (tokenVal) => dispatch(getUserInfo(tokenVal))
+const mapDispatchToProps = dispatch =>{
+  return{
+    getinfo:(tokenval) => dispatch(getUserInfo(tokenval))
   }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps,mapDispatchToProps)(Home)
