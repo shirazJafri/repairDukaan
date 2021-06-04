@@ -9,29 +9,25 @@ import Home from './Home';
 import Rates from './RatesScreen';
 import HowToUse from './HowToUse';
 import Report from './Report';
+import Map from './Map';
+import Tracker from './Tracker'
+import SplashScreen from './Splashscreen'
+import Inprogress from './Inprogress'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { signOut } from '../redux';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-//import Map from './Map'
-//import Inprogress from './Inprogress'
-//import Tracker from './Tracker'
-
-
-
 const MapStack = createStackNavigator();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
-
 const NavigationDrawerStructure = (props) => {
   //Structure for the navigatin Drawer
   const toggleDrawer = () => {
     //Props to open/close the drawer
     props.navigationProps.toggleDrawer();
   };
-
   return (
     <View style={{ flexDirection: 'row' }}>
       <TouchableOpacity onPress={toggleDrawer}>
@@ -47,7 +43,6 @@ const NavigationDrawerStructure = (props) => {
     </View>
   );
 };
-
 function ContactStack({ navigation }) {
   return (
     <Stack.Navigator>
@@ -66,16 +61,13 @@ function ContactStack({ navigation }) {
           headerTitleStyle: {
             fontWeight: 'bold',
             textAlign : 'center', //Set Header text style
-            fontSize: 42
+            fontSize: 24
           },
         }}
       />
     </Stack.Navigator>
   );
 }
-
-
-
 function HowToUseStack({ navigation }) {
   return (
     <Stack.Navigator>
@@ -94,16 +86,13 @@ function HowToUseStack({ navigation }) {
           headerTitleStyle: {
             fontWeight: 'bold',
             textAlign : 'center', //Set Header text style
-            fontSize: 42
+            fontSize: 24
           },
         }}
       />
     </Stack.Navigator>
   );
 }
-
-
-
 function RatesStack({ navigation }) {
   return (
     <Stack.Navigator>
@@ -129,9 +118,6 @@ function RatesStack({ navigation }) {
     </Stack.Navigator>
   );
 }
-
-
-
 function ReportStack({ navigation }) {
   return (
     <Stack.Navigator>
@@ -150,26 +136,17 @@ function ReportStack({ navigation }) {
           headerTitleStyle: {
             fontWeight: 'bold',
             textAlign : 'center', //Set Header text style
-            fontSize: 42
+            fontSize: 24
           },
         }}
       />
     </Stack.Navigator>
   );
 }
-
-
-
-
-
-/*function WaitStack({ navigation }) {
-  return (
-    <Stack.Navigator initialRouteName="Contact">
-      <Stack.Screen
-        name="Wait"
-        component={WaitScreen}
-        options={{
-          title: 'REPAIR DUKAAN', //Set Header Title
+const MapStackScreen = ({navigation}) => (
+  <MapStack.Navigator>
+          <MapStack.Screen name="Map" component={Map} options={{
+          title:'REPAIR DUKAAN',
           headerLeft: () => (
             <NavigationDrawerStructure navigationProps={navigation} />
           ),
@@ -180,39 +157,41 @@ function ReportStack({ navigation }) {
           headerTitleStyle: {
             fontWeight: 'bold',
             textAlign : 'center', //Set Header text style
-            fontSize: 42
+            fontSize: 24
           },
-        }}
-      />
-    </Stack.Navigator>
-  );
-}*/
-
-
-/*const MapStackScreen = ({navigation}) => (
-  <MapStack.Navigator screenOptions={{
-          headerStyle: {
-          backgroundColor: '#009387',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-          fontWeight: 'bold'
-          }
-      }}>
-          <MapStack.Screen name="Map" component={Map} options={{
-          title:'         RepairDukaan',
           }} />
                 <MapStack.Screen name="Tracker"  component = {Tracker} options={{
-          title:'         RepairDukaan',
+          title:'REPAIR DUKAAN',
+          headerLeft: () => (
+            <NavigationDrawerStructure navigationProps={navigation} />
+          ),
+          headerStyle: {
+            backgroundColor: '#f4511e', //Set Header color
+          },
+          headerTintColor: '#fff', //Set Header text color
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            textAlign : 'center', //Set Header text style
+            fontSize: 24
+          },
           }} />
           <MapStack.Screen name="Inprogress"  component = {Inprogress} options={{
-          title:'         RepairDukaan',
+          title:'REPAIR DUKAAN',
+          headerLeft: () => (
+            <NavigationDrawerStructure navigationProps={navigation} />
+          ),
+          headerStyle: {
+            backgroundColor: '#f4511e', //Set Header color
+          },
+          headerTintColor: '#fff', //Set Header text color
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            textAlign : 'center', //Set Header text style
+            fontSize: 24
+          },
           }} />
   </MapStack.Navigator>
-  );*/
-
-
-
+  );
 function HomeStack({ navigation }) {
   return (
     <Stack.Navigator
@@ -227,7 +206,7 @@ function HomeStack({ navigation }) {
         headerTitleStyle: {
           fontWeight: 'bold', //Set Header text style
           textAlign : 'center', //Set Header text style
-          fontSize: 42
+          fontSize: 24
         },
       }}>
       <Stack.Screen
@@ -240,7 +219,6 @@ function HomeStack({ navigation }) {
     </Stack.Navigator>
   );
 }
-
 function ProfileStack({ navigation }) {
   return (
     <Stack.Navigator
@@ -255,7 +233,7 @@ function ProfileStack({ navigation }) {
         headerTitleStyle: {
           fontWeight: 'bold', //Set Header text style
           textAlign : 'center', //Set Header text style
-          fontSize: 42
+          fontSize: 24,
         },
       }}>
       <Stack.Screen
@@ -268,15 +246,10 @@ function ProfileStack({ navigation }) {
     </Stack.Navigator>
   );
 }
-
-
 const handleLogOut = (props, loggingOut) => {
   loggingOut()
   props.navigation.navigate("LogIn")
 }
-
-
-
 function DrawerNagivation({loggingOut}) {
   return (
      <SafeAreaProvider>
@@ -318,20 +291,13 @@ function DrawerNagivation({loggingOut}) {
           options = {{ drawerLabel: 'Profile'}}
           component = {ProfileStack}
         />
-        {/*(<Drawer.Screen
+        <Drawer.Screen
           name = "Map"
           options = {{drawerLabel: 'Map'}}
           component = {MapStackScreen}
-        />*/}
-        
+        />      
       </Drawer.Navigator>    
-  
-       
-      
-    
      </SafeAreaProvider>  
-  
-
   );
   
 }
