@@ -11,10 +11,13 @@ import HowToUse from './HowToUse';
 import Report from './Report';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import Map from './Map'
-import Inprogress from './Inprogress'
-import Tracker from './Tracker'
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
+import { signOut } from '../redux';
+import { connect } from 'react-redux';
+import Profile from './Profile';
+//import Map from './Map'
+//import Inprogress from './Inprogress'
+//import Tracker from './Tracker'
 
 
 
@@ -186,7 +189,7 @@ function ReportStack({ navigation }) {
 }*/
 
 
-const MapStackScreen = ({navigation}) => (
+/*const MapStackScreen = ({navigation}) => (
   <MapStack.Navigator screenOptions={{
           headerStyle: {
           backgroundColor: '#009387',
@@ -206,7 +209,7 @@ const MapStackScreen = ({navigation}) => (
           title:'         RepairDukaan',
           }} />
   </MapStack.Navigator>
-  );
+  );*/
 
 
 
@@ -238,15 +241,53 @@ function HomeStack({ navigation }) {
   );
 }
 
+function ProfileStack({ navigation }) {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerLeft: () => (
+          <NavigationDrawerStructure navigationProps={navigation} />
+        ),
+        headerStyle: {
+          backgroundColor: '#f4511e', //Set Header color
+        },
+        headerTintColor: '#fff', //Set Header text color
+        headerTitleStyle: {
+          fontWeight: 'bold', //Set Header text style
+          textAlign : 'center', //Set Header text style
+          fontSize: 42
+        },
+      }}>
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          title: 'REPAIR DUKAAN', //Set Header Title
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+
+const handleLogOut = (props, loggingOut) => {
+  loggingOut()
+  props.navigation.navigate("LogIn")
+}
 
 
 
-
-
-export default function DrawerNagivation() {
+function DrawerNagivation({loggingOut}) {
   return (
      <SafeAreaProvider>
-      <Drawer.Navigator initialRouteName = {Home}>
+      <Drawer.Navigator initialRouteName = {Home} drawerContent = {props => {
+         return (
+          <DrawerContentScrollView {...props}>
+            <DrawerItemList {...props} />
+            <DrawerItem label="Log Out" onPress={() => handleLogOut(props, loggingOut)} />
+          </DrawerContentScrollView>
+        )
+      }}>
         <Drawer.Screen
           name="Home"
           options={{ drawerLabel: 'Home' }}
@@ -273,10 +314,16 @@ export default function DrawerNagivation() {
           component={ContactStack}
         />
         <Drawer.Screen
+          name = "Profile"
+          options = {{ drawerLabel: 'Profile'}}
+          component = {ProfileStack}
+        />
+        {/*(<Drawer.Screen
           name = "Map"
           options = {{drawerLabel: 'Map'}}
           component = {MapStackScreen}
-        />
+        />*/}
+        
       </Drawer.Navigator>    
   
        
@@ -308,3 +355,11 @@ const styles = StyleSheet.create({
     fontFamily: 'normal',
   }, 
 });
+
+const mapDispatchToProps = dispatch => {
+  return {
+    loggingOut: () => dispatch(signOut())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(DrawerNagivation)
