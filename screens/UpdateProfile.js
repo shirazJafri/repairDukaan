@@ -34,7 +34,7 @@ function UpdateProfile({ authState, userState, navigation, getInfo }) {
     }*/
 
     const handleUpdate =   () => {
-        axios.put(`http://192.168.1.108:3000/api/user/updateprofile/${userState.userInfo.id}`, {firstName, lastName})
+        axios.put(`http://192.168.1.108:3000/api/user/updateprofile/${userState.userInfo.id}`, {firstName, lastName, phoneNumber})
         .then((response) => {
             console.log(response)
             Alert.alert("Sucessful update!")
@@ -51,7 +51,7 @@ function UpdateProfile({ authState, userState, navigation, getInfo }) {
 
     return (
         <SafeAreaView style = {styles.container}>
-            <Text style={styles.logo}>Repair Dukaan</Text>
+            <Text style={styles.logo}>Update Profile</Text>
             <View style={styles.inputView}>
                 <TextInput
                     style={styles.inputText}
@@ -83,6 +83,9 @@ function UpdateProfile({ authState, userState, navigation, getInfo }) {
             <TouchableOpacity style={styles.loginBtn} onPress={handleUpdate}>
                 <Text style={styles.loginText}>UPDATE</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('DrawerNavigation')}>
+                <Text style={styles.loginText}>Go Back</Text>
+            </TouchableOpacity>
         </SafeAreaView>
     )
 }
@@ -96,9 +99,10 @@ const styles = StyleSheet.create({
     },
     logo: {
         fontWeight:"bold",
-        fontSize:50,
+        fontSize:40,
         color:"#fb5b5a",
         marginBottom:40,
+        textAlign: 'center'
       },
       inputView:{
         width:"80%",
@@ -120,8 +124,8 @@ const styles = StyleSheet.create({
         height:50,
         alignItems:"center",
         justifyContent:"center",
-        marginTop:30,
-        marginBottom:20
+        marginTop:10,
+        marginBottom:10
       },
       loginText:{
         color:"white"

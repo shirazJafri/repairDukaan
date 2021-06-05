@@ -5,9 +5,9 @@ const user = require("../models/User")
 //const { Router } = require("express");
 
 router.put("/api/user/updateprofile/:id", (req, res) => {
-    const { firstName, lastName } = req.body;
+    const { firstName, lastName, phoneNumber } = req.body;
 
-    user.findByIdAndUpdate(req.params.id, { first_name: firstName, last_name: lastName }, {new: true}, function (err, docs) {
+    user.findByIdAndUpdate(req.params.id, { first_name: firstName, last_name: lastName, phone_number: phoneNumber }, {new: true}, function (err, docs) {
         if (err) {
             console.log(err);
         }

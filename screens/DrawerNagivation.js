@@ -230,8 +230,8 @@ function HomeStack({ navigation }) {
         options={{
           title: <Image
     
-          source={{ uri: "https://i.ibb.co/TqTc6Sz/56780962d5e54ef2b180166b12b44915.png"}}
-          style = {{width : 70, height : 70}}
+          source={{ uri: "https://i.ibb.co/pRmWNRX/logo.png"}}
+          style = {{width : 100, height : 100, marginBottom: 15}}
         />, //Set Header Title
         }}
       />
@@ -316,7 +316,7 @@ function DrawerNagivation({loggingOut}) {
         />
         <Drawer.Screen
           name = "Map"
-          options = {{drawerLabel: 'Map'}}
+          options = {{drawerLabel: 'Book'}}
           component = {MapStackScreen}
         />      
       </Drawer.Navigator>    

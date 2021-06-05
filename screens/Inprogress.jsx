@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import {View, Text,Animated,StyleSheet,Button,Alert} from 'react-native'
+import {View, Text,Animated,StyleSheet,Button,Alert, Image} from 'react-native'
 import Constants from 'expo-constants';
 import axios from 'axios';
 const Inprogress = ({route,navigation}) => {
@@ -23,7 +23,8 @@ const Inprogress = ({route,navigation}) => {
         }
        return(
            <View style={styles.container}>
-               <Text>Your Repair has Started</Text>
+               <Text style = {{fontSize: 30, color: '#364f6b', fontWeight: 'bold', marginBottom: 20}}>Your Repair Has Started</Text>
+               <Image source = {{uri : "https://bestanimations.com/media/loading-gears/2074796765loading-gears-animation-3.gif", height: 300, width: 350}}/>
            </View>
        )
 }
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
       paddingTop: Constants.statusBarHeight,
-      backgroundColor: '#ecf0f1',
+      backgroundColor: 'aliceblue',
       padding: 8,
     }
   });

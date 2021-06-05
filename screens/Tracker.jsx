@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import {View, Text,Animated,StyleSheet,Button,Alert} from 'react-native'
+import {View, Text,Animated,StyleSheet,Button,Alert, TouchableOpacity} from 'react-native'
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import Constants from 'expo-constants';
 import axios from 'axios';
@@ -69,7 +69,7 @@ if(move){
 }
   return (
     <View style={styles.container}>
-      <Text>Your Mechanic {wname} is Arrivng Soon</Text>
+      <Text style = {{fontSize: 25, textAlign: 'center', color: '#364f6b', marginVertical: 30}}>Your Mechanic {wname} is Arriving Soon</Text>
       <CountdownCircleTimer
         isPlaying={isPlaying}
         duration={4*60}
@@ -80,15 +80,17 @@ if(move){
     >
       {({ remainingTime, animatedColor }) => (
         <View>
-        <Animated.Text style={{ color: animatedColor, fontSize: 40 }}>
-          {Math.ceil(remainingTime/60)}
+        <Animated.Text style={{ color: animatedColor, fontSize: 40, textAlign: 'center' }}>
+        {Math.ceil(remainingTime/60)}
         </Animated.Text>
-        <Animated.Text style={{ color: animatedColor, fontSize: 20 }}>
+        <Animated.Text style={{ color: animatedColor, fontSize: 20, textAlign: 'center' }}>
         Minutes</Animated.Text>
         </View>
       )}
     </CountdownCircleTimer>
-    <Button title="Cancel" onPress={handleCancel}></Button>
+    <TouchableOpacity onPress={handleCancel} style={styles.button}>
+      <Text style={styles.buttonText}>Cancel</Text>
+    </TouchableOpacity>
   </View>
   )
 }
@@ -101,7 +103,19 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     backgroundColor: '#ecf0f1',
     padding: 8,
-  }
+  },
+  button: {
+    backgroundColor: "#f4511e",
+    padding: 12,
+    borderRadius: 60,
+    marginVertical: 40,
+},
+buttonText: {
+    fontSize: 20,
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center'
+},
 });
 
 export default Tracker;
