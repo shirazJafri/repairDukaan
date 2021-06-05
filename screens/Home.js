@@ -60,7 +60,7 @@ function Home({ authState, userState, navigation }) {
            (err);
       })
     }
-  const getaddress = async (lat,lng) =>{
+  const getaddress1 = async (lat,lng) =>{
     var addressComponent
       await axios.get( 
        "http://www.mapquestapi.com/geocoding/v1/reverse?key="+KEY+"&location="+lat+","+lng+"&includeRoadMetadata=true&includeNearestIntersection=true",
@@ -76,10 +76,29 @@ function Home({ authState, userState, navigation }) {
           ////(response.data.results[0].locations[0].street);
           
           setStreet1(response.data.results[0].locations[0].street)
-          setStreet2(response.data.results[0].locations[0].street)
         }
       )
      }
+
+     const getaddress2 = async (lat,lng) =>{
+      var addressComponent
+        await axios.get( 
+         "http://www.mapquestapi.com/geocoding/v1/reverse?key="+KEY+"&location="+lat+","+lng+"&includeRoadMetadata=true&includeNearestIntersection=true",
+          {
+            headers: {
+              "Content-type": "application/json"
+            }
+          }
+        ).then(
+          (response) => {
+            //("Hello")
+            ////(response.data)
+            ////(response.data.results[0].locations[0].street);
+            
+            setStreet2(response.data.results[0].locations[0].street)
+          }
+        )
+       }
   const handleLogIn = async () => {
     setCurrent(false);
     setButtonS(true);
@@ -97,7 +116,7 @@ function Home({ authState, userState, navigation }) {
               setFare2(data[i].amount)
               setStatus2(data[i].status)
               ////(Lati, Longi)
-              getaddress(data[i].location.latitude, data[i].location.longitude);
+              getaddress2(data[i].location.latitude, data[i].location.longitude)
               setPast(true)
             }
             else {   
@@ -108,7 +127,7 @@ function Home({ authState, userState, navigation }) {
                 setStatus(data[i].status)
                 setRepair(data[i]._id)
                 ////(Lati, Longi)
-                getaddress(data[i].location.latitude, data[i].location.longitude);
+                getaddress1(data[i].location.latitude, data[i].location.longitude)
                 setCurrent(true)
                 setButtonS(false) 
             }
