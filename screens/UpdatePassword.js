@@ -3,8 +3,9 @@ import { StyleSheet, SafeAreaView, TextInput, Text, Alert, View, Image, Touchabl
 import axios from 'axios'
 import { connect } from 'react-redux';
 import {signOut} from "../redux/auth/authActions"
+import { clearingState } from '../redux/user/userActions';
 
-function UpdatePassword({ authState, navigation, loggingOut }) {
+function UpdatePassword({ authState, navigation, loggingOut, clearUserState }) {
     const [currentPassword, setCurrentPassword] = useState("")
     const [newPassword, setNewPassword] = useState("")
 
@@ -17,6 +18,7 @@ function UpdatePassword({ authState, navigation, loggingOut }) {
         .then((response) => {
             Alert.alert('Change of Password Successful! Please re-login!')
             loggingOut()
+            clearUserState()
             navigation.navigate('LogIn')
         })
         .catch((error) => {
@@ -108,7 +110,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loggingOut: () => dispatch(signOut())
+        loggingOut: () => dispatch(signOut()),
+        clearUserState: () => dispatch(clearingState())
     }
 }
 

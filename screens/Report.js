@@ -120,7 +120,7 @@ export default function Report() {
                 console.log(responseJson)
               if (responseJson.header.message === 'Booking added!') {
                 onChangeText("")
-                console.log("Complaint filed successfully");
+                Alert.alert('Your complaint has ben recorded')
               }
               else {
                 return(
