@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -39,6 +39,8 @@ export default function Contact() {
       <Text style = {{color:"#364f6b" , fontSize : 22, fontStyle: 'normal', width : 355, marginVertical: 5, textAlign : 'center', fontWeight : 'bold'}}>EMAIL : {email}</Text>
       <Text style = {{color:"#364f6b" , fontSize : 22, fontStyle: 'normal', width : 355, marginVertical: 5, textAlign : 'center', fontWeight : 'bold'}}>PHONE : {phone}</Text>
       <Text style = {{color:"#364f6b" , fontSize : 22, fontStyle: 'normal', width : 355, marginVertical: 5, textAlign : 'center', fontWeight : 'bold'}}>ADDRESS : {address}</Text>
+      <Text style = {{color : 'white' , fontSize : 27, fontFamily: 'sans-serif-light', fontStyle: 'normal', width : 300, borderWidth: 2, borderRadius: 50, marginVertical: 50, backgroundColor: '#f4511e', textAlign : 'center', borderColor: '#f4511e'}}>SITE MAP</Text>
+      <Image source = {{uri: 'https://i.ibb.co/hF1ndVH/contact.png', height: 225, width: 300}} />
     </View>
     </SafeAreaProvider>
   );
