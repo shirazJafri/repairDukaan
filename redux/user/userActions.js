@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FETCH_USER_FAILURE, FETCH_USER_REQUEST, FETCH_USER_SUCCESS } from "./userTypes"
+import { CLEAR_STATE, FETCH_USER_FAILURE, FETCH_USER_REQUEST, FETCH_USER_SUCCESS } from "./userTypes"
 
 const fetchUserRequest = () => {
     return {
@@ -21,6 +21,12 @@ const fetchUserFailure = error => {
     }
 }
 
+const clearState = () => {
+    return {
+        type: CLEAR_STATE
+    }
+}
+
 export const getUserInfo = (token) => {
     return (dispatch) => {
         dispatch(fetchUserRequest())
@@ -38,3 +44,10 @@ export const getUserInfo = (token) => {
             })
     }
 }
+
+export const clearingState = () => {
+    return (dispatch) => {
+        dispatch(clearState())
+    }
+}
+

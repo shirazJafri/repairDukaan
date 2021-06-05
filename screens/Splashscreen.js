@@ -3,9 +3,9 @@ import { ActivityIndicator } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
-import { getUserInfo } from '../redux/user/userActions';
+import { clearingState, getUserInfo } from '../redux/user/userActions';
 
-function SplashScreen({userState, authState, getInfo, navigation}) {
+function SplashScreen({userState, authState, getInfo, navigation, clearUserState}) {
     useEffect(() => {
         getInfo(authState.token)
     }, [])
@@ -30,7 +30,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getInfo: (tokenVal) => dispatch(getUserInfo(tokenVal))
+        getInfo: (tokenVal) => dispatch(getUserInfo(tokenVal)),
+        clearUserState: () => dispatch(clearingState())
     }
 }
 

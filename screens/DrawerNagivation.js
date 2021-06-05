@@ -19,6 +19,7 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerI
 import { signOut } from '../redux';
 import { connect } from 'react-redux';
 import Profile from './Profile';
+import { clearingState } from '../redux/user/userActions';
 const MapStack = createStackNavigator();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -285,18 +286,19 @@ function ProfileStack({ navigation }) {
     </Stack.Navigator>
   );
 }
-const handleLogOut = (props, loggingOut) => {
+const handleLogOut = (props, loggingOut, clearUserState) => {
   loggingOut()
+  clearUserState()
   props.navigation.navigate("LogIn")
 }
-function DrawerNagivation({loggingOut}) {
+function DrawerNagivation({loggingOut, clearUserState}) {
   return (
      <SafeAreaProvider>
       <Drawer.Navigator initialRouteName = {Home} drawerContent = {props => {
          return (
           <DrawerContentScrollView {...props}>
             <DrawerItemList {...props} />
-            <DrawerItem label="Log Out" onPress={() => handleLogOut(props, loggingOut)} />
+            <DrawerItem label="Log Out" onPress={() => handleLogOut(props, loggingOut, clearUserState)} />
           </DrawerContentScrollView>
         )
       }}>
@@ -363,7 +365,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    loggingOut: () => dispatch(signOut())
+    loggingOut: () => dispatch(signOut()),
+    clearUserState: () => dispatch(clearingState())
   }
 }
 

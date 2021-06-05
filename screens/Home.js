@@ -102,7 +102,7 @@ function Home({ authState, userState, navigation }) {
   const handleLogIn = async () => {
     setCurrent(false);
     setButtonS(true);
-    //console.log(userState.userInfo.id);
+    console.log(userState.userInfo.id);
         await axios.get(`https://enigmatic-mesa-42065.herokuapp.com/repair/get/${userState.userInfo.id}`, {
         })
         .then((response) => {

@@ -1,4 +1,5 @@
 import axios from "axios"
+import { clearingState } from "../user/userActions"
 import { LOG_OUT, SIGN_IN_FAILURE, SIGN_IN_REQUEST, SIGN_IN_SUCCESS } from "./authTypes"
 
 const signInRequest = () => {
