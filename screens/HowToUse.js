@@ -16,11 +16,11 @@ export default function HowToUse() {
     <View style={styles.container}>
       
 
-      <Text style = {{color : 'white' , fontSize : 30, fontStyle: 'normal', width : 400, borderWidth: 2, borderRadius: 50, marginVertical: 10,  fontWeight : 'bold', backgroundColor: '#f4511e', borderColor: '#f4511e', textAlign : 'center'}}>HOW TO USE?</Text>
-      <Text style = {{color : 'black' , fontSize : 20, fontStyle: 'normal', fontWeight:"bold", color:"#364f6b", width : 355, borderWidth: 2, backgroundColor : "#fff", borderRadius: 50, marginVertical: 15, textAlign : 'center'}}>NAVIGATE TO HOME PAGE AFTER LOGIN</Text>
-      <Text style = {{color : 'black' , fontSize : 20, fontStyle: 'normal', fontWeight:"bold", color:"#364f6b", width : 355, borderWidth: 2, backgroundColor : "#fff", borderRadius: 50, marginVertical: 15, textAlign : 'center'}}>SELECT APPROPRIATE SERVICE TO BOOK</Text>
-      <Text style = {{color : 'black' , fontSize : 20, fontStyle: 'normal', fontWeight:"bold", color:"#364f6b", width : 355, borderWidth: 2, backgroundColor : "#fff", borderRadius: 50, marginVertical: 15, textAlign : 'center'}}>ENABLE LOCATION SERVICE FOR TRACKING</Text>
-      <Text style = {{color : 'black' , fontSize : 20, fontStyle: 'normal', fontWeight:"bold", color:"#364f6b", width : 355, borderWidth: 2, backgroundColor : "#fff", borderRadius: 50, marginVertical: 15, textAlign : 'center'}}>ENTER SUBMIT TO COMPLETE BOOKING!</Text>
+      <Text style = {{color : 'white' , fontSize : 27, fontFamily: 'sans-serif-light', fontStyle: 'normal', width : 300, borderWidth: 2, borderRadius: 50, marginVertical: 10, backgroundColor: '#f4511e', borderColor: '#f4511e', textAlign : 'center'}}>HOW TO USE?</Text>
+      <Text style = {{color : 'black' , fontSize : 22, fontStyle: 'normal', fontWeight:"bold", color:"#364f6b", width : 340, borderWidth: 2, backgroundColor : "#fff", borderRadius: 50, marginVertical: 15, textAlign : 'center'}}>NAVIGATE TO HOME PAGE AFTER LOGIN</Text>
+      <Text style = {{color : 'black' , fontSize : 22, fontStyle: 'normal', fontWeight:"bold", color:"#364f6b", width : 340, borderWidth: 2, backgroundColor : "#fff", borderRadius: 50, marginVertical: 15, textAlign : 'center'}}>SELECT APPROPRIATE SERVICE BOOKING</Text>
+      <Text style = {{color : 'black' , fontSize : 22, fontStyle: 'normal', fontWeight:"bold", color:"#364f6b", width : 340, borderWidth: 2, backgroundColor : "#fff", borderRadius: 50, marginVertical: 15, textAlign : 'center'}}>ENABLE LOCATION SERVICE FOR TRACKING</Text>
+      <Text style = {{color : 'black' , fontSize : 22, fontStyle: 'normal', fontWeight:"bold", color:"#364f6b", width : 340, borderWidth: 2, backgroundColor : "#fff", borderRadius: 50, marginVertical: 15, textAlign : 'center'}}>ENTER SUBMIT TO COMPLETE BOOKING!</Text>
     </View>
     </SafeAreaProvider>
   );

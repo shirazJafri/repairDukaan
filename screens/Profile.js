@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, Image, View, Alert, StatusBar} from 'react-native';
+import { StyleSheet, Text, Image, View, Alert, StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import logo from '../assets/Person.jpeg';
 import axios from 'axios';
@@ -8,8 +8,9 @@ import { connect } from 'react-redux';
 import { getUserInfo } from '../redux/user/userActions';
 import { TouchableOpacity } from 'react-native';
 import { signOut } from '../redux/auth/authActions';
+const dateFormat = require('dateformat');
 
-function Profile({authState, userState, getInfo, loggingOut, navigation}) {
+function Profile({ authState, userState, getInfo, loggingOut, navigation }) {
     React.useEffect(() => {
         getInfo(authState.token)
     }, []);
@@ -21,26 +22,24 @@ function Profile({authState, userState, getInfo, loggingOut, navigation}) {
         navigation.navigate('LogIn')
     }
 
-    
+    const date = dateFormat(userState.userInfo.date_joined, "ddd mmm dd yyyy")
     return !userState.loading && userState.userInfo ? (
         <SafeAreaProvider>
             <View style={styles.container}>
+                <Text style={{ color: 'white', fontSize: 27, fontFamily: 'sans-serif-light', fontStyle: 'normal', borderColor: '#f4511e', width: 300, borderWidth: 2, borderRadius: 50, marginVertical: 10, backgroundColor: '#f4511e', textAlign: 'center' }}>PROFILE</Text>
                 <Image source={logo} style={{ width: 100, height: 130 }} />
-                <Text style={{ color: '#888', fontSize: 18, textAlign: 'center' }}>{userState.userInfo.first_name}  {userState.userInfo.last_name}</Text>
-                <Text style={{ color: 'black', width: 350, fontSize: 22, borderWidth: 2, marginVertical: 20, textAlign: 'center' }}>Joined Date: <Text style={{ color: "red" }}>  {userState.userInfo.date_joined}  </Text></Text>
-                <Text style={{ color: 'black', width: 350, fontSize: 22, borderWidth: 2, borderColor: 'black', marginVertical: 0, textAlign: 'center' }}>Bookings Undertaken: <Text style={{ color: "red" }}>55</Text></Text>
+                <Text style={{ color: '#364f6b', fontWeight: 'bold', fontSize: 30, textAlign: 'center' }}>{userState.userInfo.first_name}  {userState.userInfo.last_name}</Text>
+                <Text style={{ color: '#364f6b', fontWeight: 'bold', width: 350, fontSize: 22, borderWidth: 2, marginVertical: 10, textAlign: 'center', borderRadius: 20, borderColor: '#364f6b' }}>JOINED DATE: <Text style={{ color: "red" }}> {date} </Text></Text>
+                <Text style={{ color: '#364f6b', fontWeight: 'bold', width: 350, fontSize: 22, borderWidth: 2, marginVertical: 20, textAlign: 'center', borderRadius: 20, borderColor: '#364f6b' }}>PHONE NUMBER: <Text style={{ color: "red" }}>{userState.userInfo.phone_number}</Text></Text>
                 <View style={styles.lineStyle} />
-                <Text style={{ color: '#888', fontSize: 30, marginVertical: 0, textAlign: 'center' }}>RECENT BOOKINGS</Text>
-                <Text style={{ color: 'black', width: 300, fontSize: 22, borderWidth: 2, marginVertical: 20, textAlign: 'center' }}>31, January 2021 <Text style={{ color: "red", width: 350, fontSize: 22, borderWidth: 2, marginVertical: 20, textAlign: 'center' }}>  Rs. 61</Text></Text>
-                <Text style={{ color: 'black', width: 300, fontSize: 22, borderWidth: 2, borderColor: 'black', marginVertical: 0, textAlign: 'center' }}>1, Febuary 2021  <Text style={{ color: "red" }}>   Rs. 77</Text></Text>
-                <TouchableOpacity onPress = {() => navigation.navigate("UpdatePassword")}><Text>Update Password</Text></TouchableOpacity>
-                <TouchableOpacity onPress = {() => navigation.navigate("UpdateScreen")}><Text>Update Profile</Text></TouchableOpacity>
-                <TouchableOpacity onPress = {handleLogOut}><Text>LOGOUT</Text></TouchableOpacity>
-                <TouchableOpacity onPress = {() => navigation.navigate("ContactUs")}><Text>Contact</Text></TouchableOpacity>
-                <TouchableOpacity onPress = {() => navigation.navigate("Report")}><Text>Report</Text></TouchableOpacity>
-                <TouchableOpacity onPress = {() => navigation.navigate("Home")}><Text>Home</Text></TouchableOpacity>
-                <TouchableOpacity onPress = {() => navigation.navigate("HowToUse")}><Text>How To Use</Text></TouchableOpacity>
-                <TouchableOpacity onPress = {() => navigation.navigate("Map")}><Text>Map</Text></TouchableOpacity>
+                <View>
+                    <TouchableOpacity onPress={() => navigation.navigate('UpdatePassword')} style={styles.button}>
+                        <Text style={styles.buttonText}>Update Password</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('UpdateProfile')} style={styles.button}>
+                        <Text style={styles.buttonText}>Update Profile</Text>
+                    </TouchableOpacity>
+                </View>
                 <StatusBar style="auto" />
             </View>
         </SafeAreaProvider>
@@ -65,7 +64,8 @@ const mapDispatchToProps = dispatch => {
 
 const styles = StyleSheet.create({
     lineStyle: {
-        borderBottomColor: "black",
+        color: '#364f6b',
+        borderBottomColor: "#364f6b",
         borderBottomWidth: 4,
         alignSelf: 'stretch',
         marginVertical: 25,
@@ -80,6 +80,18 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'flex-start',
+    },
+    button: {
+        backgroundColor: "#f4511e",
+        padding: 12,
+        borderRadius: 60,
+        marginVertical: 10,
+    },
+    buttonText: {
+        fontSize: 20,
+        color: '#fff',
+        fontWeight: 'bold',
+        textAlign: 'center'
     },
 });
 

@@ -35,13 +35,10 @@ export default function Contact() {
   return (
     <SafeAreaProvider>
     <View style={styles.container}>
-      <Text style = {{color : 'white' , fontSize : 40, fontStyle: 'normal', width : 400, borderWidth: 2, borderRadius: 50, marginVertical: 10, fontWeight : 'bold', backgroundColor: '#f4511e', textAlign : 'center'}}>CONTACT US</Text>
-      <Text style = {{color : 'black' , fontSize : 35, fontStyle: 'normal', width : 355, marginVertical: 5, textAlign : 'center'}}>Reach out to us !</Text>
-      <View style={styles.lineStyle2 }/>
-      <Text style = {{color : 'black' , fontSize : 22, fontStyle: 'normal', width : 355, marginVertical: 5, textAlign : 'center'}}>EMAIL : {email}</Text>
-      <Text style = {{color : 'black' , fontSize : 22, fontStyle: 'normal', width : 355, marginVertical: 5, textAlign : 'center'}}>PHONE : {phone}</Text>
-      <Text style = {{color : 'black' , fontSize : 22, fontStyle: 'normal', width : 355, marginVertical: 5, textAlign : 'center'}}>ADDRESS : {address}</Text>
-      <Text style = {{color : 'black' , fontSize : 35, fontStyle: 'normal', width : 355, marginVertical: 15, textAlign : 'center'}}>CONTACT MAP</Text>
+      <Text style = {{color : 'white' , fontSize : 27, fontFamily: 'sans-serif-light', fontStyle: 'normal', width : 300, borderWidth: 2, borderRadius: 50, marginVertical: 10, backgroundColor: '#f4511e', textAlign : 'center', borderColor: '#f4511e'}}>CONTACT</Text>
+      <Text style = {{color:"#364f6b" , fontSize : 22, fontStyle: 'normal', width : 355, marginVertical: 5, textAlign : 'center', fontWeight : 'bold'}}>EMAIL : {email}</Text>
+      <Text style = {{color:"#364f6b" , fontSize : 22, fontStyle: 'normal', width : 355, marginVertical: 5, textAlign : 'center', fontWeight : 'bold'}}>PHONE : {phone}</Text>
+      <Text style = {{color:"#364f6b" , fontSize : 22, fontStyle: 'normal', width : 355, marginVertical: 5, textAlign : 'center', fontWeight : 'bold'}}>ADDRESS : {address}</Text>
     </View>
     </SafeAreaProvider>
   );

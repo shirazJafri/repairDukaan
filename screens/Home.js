@@ -9,6 +9,10 @@ import { ScrollView } from 'react-native';
 const dateFormat = require('dateformat');
 import {getUserInfo} from '../redux/user/userActions';
 import {connect} from 'react-redux'
+import { Ionicons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons';
 function Home({ authState, userState, navigation }) {
   var c1 = 0;
   var c2 = 0;
@@ -140,8 +144,8 @@ function Home({ authState, userState, navigation }) {
      {ButtonS == true ? <TouchableOpacity onPress={() => {}}   style={styles.button}>
          <Text style={styles.buttonText}>BOOK NOW</Text>
        </TouchableOpacity> : null}
-       {Current == true ? <View style = {{flexDirection : 'row'}}><TouchableOpacity onPress={() =>{}}><Text style = {{color : '#364f6b' , width: 300, fontWeight : 'bold', fontSize : 25, borderWidth: 3, borderColor: '#3cb371', borderRadius: 15, backgroundColor : '#fff', marginVertical: 20, textAlign : 'left'}}>  Current Request {"\n"}  {date} {'\n'}  {Street1} {'\n'} {Status} {'\n'}  EXPECTED PKR {Fare}</Text></TouchableOpacity></View> : <Image source={{uri : "https://i.ibb.co/hsqMvdn/display.png"}} style={{ width: 300, height: 200}} />}
-       {Past == true ? <View style = {{flexDirection : 'row'}}><Text style = {{color : '#364f6b' , width: 300, fontWeight : 'bold', fontSize : 25, borderWidth: 3, borderColor: '#98fb98', borderRadius: 15, backgroundColor : '#fff',  marginVertical: 0, textAlign : 'left'}}>  Past Request{"\n"}  {date2}{'\n'}  {Street2}{'\n'}  {Status2} {'\n'} PKR {Fare2}</Text></View> :  <Image source={{uri : "https://i.ibb.co/hsqMvdn/display.png"}} style={{ width: 300, height: 200}} />}    
+       {Current == true ? <View style = {{flexDirection : 'row'}}><TouchableOpacity onPress={() =>{}}><Text style = {{color : '#364f6b' , width: 300, fontWeight : 'bold', fontSize : 25, borderWidth: 3, borderColor: '#3cb371', borderRadius: 15, backgroundColor : '#fff', marginVertical: 20, textAlign : 'left'}}><Ionicons name="timer" size={32} color="green" />  Current Request {"\n"}  <AntDesign name="calendar" size={24} color="black" />  {date} {'\n'}<Entypo name="location" size={24} color="black" />  {Street1} {'\n'}  <MaterialIcons name="book-online" size={24} color="black" /> {Status} {'\n'}  <Entypo name="wallet" size={24} color="black" />  EXPECTED PKR {Fare}</Text></TouchableOpacity></View> : <Image source={{uri : "https://i.ibb.co/GQqWh2K/appdev1.png"}} style={{ width: 300, height: 200, marginVertical: 12}} />}
+       {Past == true ? <View style = {{flexDirection : 'row'}}><Text style = {{color : '#364f6b' , width: 300, fontWeight : 'bold', fontSize : 25, borderWidth: 3, borderColor: '#98fb98', borderRadius: 15, backgroundColor : '#fff',  marginVertical: 20, textAlign : 'left'}}>  <Ionicons name="timer" size={32} color="green" /> Past Request{"\n"}  <AntDesign name="calendar" size={24} color="black" />  {date2}{'\n'}  <Entypo name="location" size={24} color="black" />  {Street2}{'\n'}  <MaterialIcons name="book-online" size={24} color="black" />  {Status2} {'\n'}  <Entypo name="wallet" size={24} color="black" />  PKR {Fare2}</Text></View> :  <Image source={{uri : "https://i.ibb.co/hsqMvdn/display.png"}} style={{ width: 300, height: 200, marginVertical: 12}} />}    
           
        
 

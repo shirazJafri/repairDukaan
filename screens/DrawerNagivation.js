@@ -50,7 +50,10 @@ function ContactStack({ navigation }) {
         name="Contact"
         component={Contact}
         options={{
-          title: 'REPAIR DUKAAN', //Set Header Title
+          title: <Image
+          source={{ uri: "https://i.ibb.co/TqTc6Sz/56780962d5e54ef2b180166b12b44915.png"}}
+          style = {{width : 70, height : 70}}
+        />, //Set Header Title
           headerLeft: () => (
             <NavigationDrawerStructure navigationProps={navigation} />
           ),
@@ -75,7 +78,11 @@ function HowToUseStack({ navigation }) {
         name="How To Use"
         component={HowToUse}
         options={{
-          title: 'REPAIR DUKAAN', //Set Header Title
+          title: <Image
+    
+          source={{ uri: "https://i.ibb.co/TqTc6Sz/56780962d5e54ef2b180166b12b44915.png"}}
+          style = {{width : 70, height : 70}}
+        />, //Set Header Title
           headerLeft: () => (
             <NavigationDrawerStructure navigationProps={navigation} />
           ),
@@ -100,7 +107,11 @@ function RatesStack({ navigation }) {
         name="Rates"
         component={Rates}
         options={{
-          title: 'REPAIR DUKAAN', //Set Header Title
+          title: <Image
+    
+          source={{ uri: "https://i.ibb.co/TqTc6Sz/56780962d5e54ef2b180166b12b44915.png"}}
+          style = {{width : 70, height : 70}}
+        />, //Set Header Title
           headerLeft: () => (
             <NavigationDrawerStructure navigationProps={navigation} />
           ),
@@ -125,7 +136,11 @@ function ReportStack({ navigation }) {
         name="Report"
         component={Report}
         options={{
-          title: 'REPAIR DUKAAN', //Set Header Title
+          title: <Image
+    
+          source={{ uri: "https://i.ibb.co/TqTc6Sz/56780962d5e54ef2b180166b12b44915.png"}}
+          style = {{width : 70, height : 70}}
+        />, //Set Header Title
           headerLeft: () => (
             <NavigationDrawerStructure navigationProps={navigation} />
           ),
@@ -213,7 +228,11 @@ function HomeStack({ navigation }) {
         name="Home"
         component={Home}
         options={{
-          title: 'REPAIR DUKAAN', //Set Header Title
+          title: <Image
+    
+          source={{ uri: "https://i.ibb.co/TqTc6Sz/56780962d5e54ef2b180166b12b44915.png"}}
+          style = {{width : 70, height : 70}}
+        />, //Set Header Title
         }}
       />
     </Stack.Navigator>
@@ -240,7 +259,11 @@ function ProfileStack({ navigation }) {
         name="Profile"
         component={Profile}
         options={{
-          title: 'REPAIR DUKAAN', //Set Header Title
+          title: <Image
+    
+          source={{ uri: "https://i.ibb.co/TqTc6Sz/56780962d5e54ef2b180166b12b44915.png"}}
+          style = {{width : 70, height : 70}}
+        />, //Set Header Title
         }}
       />
     </Stack.Navigator>

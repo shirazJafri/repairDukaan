@@ -10,9 +10,11 @@ function SplashScreen({userState, authState, getInfo, navigation}) {
         getInfo(authState.token)
     }, [])
 
+    console.log(userState)
+
     if (!userState.loading && userState.userInfo)
         navigation.navigate('DrawerNavigation')
-
+    
     return (
         <View style = {styles.activity}>
             <ActivityIndicator size="large" color="#00ff00" />

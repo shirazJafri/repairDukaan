@@ -123,7 +123,7 @@ export default function Report() {
       
     <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "white" translucent = {true}/>
 
-      <Text style = {{color : 'white' , fontSize : 30, fontStyle: 'normal', fontWeight: 'bold', borderColor: '#f4511e', width : 400, borderWidth: 2, borderRadius: 50, marginVertical: 10, backgroundColor: '#f4511e', textAlign : 'center'}}>REPORT</Text>
+      <Text style = {{color : 'white' , fontSize : 27, fontFamily: 'sans-serif-light', fontStyle: 'normal', borderColor: '#f4511e', width : 300, borderWidth: 2, borderRadius: 50, marginVertical: 10, backgroundColor: '#f4511e', textAlign : 'center'}}>REPORT</Text>
       
       <Text style={styles.header}>TICK ONE OR MORE OPTION BELOW</Text>
       
@@ -241,12 +241,13 @@ lineStyle2:{
     flexDirection:"row",
   },
   submit:{
-    width:"8%",
+    width:"30%",
     backgroundColor: '#f4511e',
     borderRadius:20,
     padding:10,
     alignItems:"center",
-    marginTop:20
+    marginTop:20,
+    marginBottom: 40
   },
   header:{
     fontSize:30,
@@ -254,5 +255,6 @@ lineStyle2:{
     color:"#364f6b",
     marginBottom:30,
     marginVertical: 10,
+    textAlign: 'center'
   }
 });

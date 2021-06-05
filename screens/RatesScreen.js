@@ -31,7 +31,7 @@ function RatesScreen() {
 
     return ratesList ? (
         <View style = {styles.container}>
-            <Text style = {styles.h2text}>Rates List</Text>
+            <Text style={{ color: 'white', fontSize: 27, fontFamily: 'sans-serif-light', fontStyle: 'normal', borderColor: '#f4511e', width: 300, borderWidth: 2, borderRadius: 50, marginVertical: 10, backgroundColor: '#f4511e', textAlign: 'center' }}>RATES</Text>
         <FlatList
             data={ratesList}
             renderItem={renderItem}
@@ -67,11 +67,26 @@ const styles = StyleSheet.create({
         borderRadius: 2,
       },
       name: {
+        borderColor: '#364f6b',
         fontFamily: 'Verdana',
-        fontSize: 18
+        fontSize: 30,
+        color: '#364f6b',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        borderRadius: 50,
+        borderWidth: 2,
+        width: 200
       },
       email: {
-        color: 'red'
+        borderColor: '#364f6b',
+        color: 'red',
+        textAlign: 'center',
+        fontSize: 25,
+        borderRadius: 50,
+        borderWidth: 2,
+        width: 50,
+        alignSelf: 'center',
+        marginVertical: 5
       },
       activity: {
         flex: 1,

@@ -21,10 +21,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Provider store = {store}>
-        <Stack.Navigator screenOptions = {{headerShown: false}}>
-          <Stack.Screen name = "LogIn" component = {LogInForm} />
-          <Stack.Screen name = "SplashScreen" component = {SplashScreen}/>
+        <Stack.Navigator screenOptions = {{headerShown: false}} initialRouteName = 'LogIn'>
           <Stack.Screen name = "RegisterScreen" component = {RegisterScreen} />
+          <Stack.Screen name = "LogIn" component = {LogInForm} />
+          <Stack.Screen name = 'UpdatePassword' component = {UpdatePassword} />
+          <Stack.Screen name = 'UpdateProfile' component = {UpdateProfile} />
+          <Stack.Screen name = "SplashScreen" component = {SplashScreen}/>
           <Stack.Screen name = "DrawerNavigation" component = {DrawerNagivation} options =  {{title: 'REPAIR DUKAAN', headerLeft: () => null}}/>
         </Stack.Navigator>
       </Provider>
