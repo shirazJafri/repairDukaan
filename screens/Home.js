@@ -97,7 +97,7 @@ function Home({ authState, userState, navigation }) {
               setFare2(data[i].amount)
               setStatus2(data[i].status)
               ////(Lati, Longi)
-             // getaddress(data[i].location.latitude, data[i].location.longitude);
+              getaddress(data[i].location.latitude, data[i].location.longitude);
               setPast(true)
             }
             else {   
@@ -108,7 +108,7 @@ function Home({ authState, userState, navigation }) {
                 setStatus(data[i].status)
                 setRepair(data[i]._id)
                 ////(Lati, Longi)
-               // getaddress(data[i].location.latitude, data[i].location.longitude);
+                getaddress(data[i].location.latitude, data[i].location.longitude);
                 setCurrent(true)
                 setButtonS(false) 
             }
@@ -141,9 +141,9 @@ function Home({ authState, userState, navigation }) {
     style = {{width : 110, height : 110}}
   />
       </View>
-     {ButtonS == true ? <TouchableOpacity onPress={() => {}}   style={styles.button}>
+     {/*{ButtonS == true ? <TouchableOpacity onPress={() => {}}   style={styles.button}>
          <Text style={styles.buttonText}>BOOK NOW</Text>
-       </TouchableOpacity> : null}
+  </TouchableOpacity> : null}*/}
        {Current == true ? <View style = {{flexDirection : 'row'}}><TouchableOpacity onPress={() =>navigation.navigate('Map')}><Text style = {{color : '#364f6b' , width: 300, fontWeight : 'bold', fontSize : 25, borderWidth: 3, borderColor: '#3cb371', borderRadius: 15, backgroundColor : '#fff', marginVertical: 20, textAlign : 'left'}}>  <Ionicons name="timer" size={32} color="green" /> Current Request {"\n"}  <AntDesign name="calendar" size={24} color="black" />  {date} {'\n'}  <Entypo name="location" size={24} color="black" />  {Street1} {'\n'}  <MaterialIcons name="book-online" size={24} color="black" />  {Status} {'\n'}  <Entypo name="wallet" size={24} color="black" />  EXPECTED PKR {Fare}</Text></TouchableOpacity></View> : <Image source={{uri : "https://i.ibb.co/GQqWh2K/appdev1.png"}} style={{ width: 300, height: 175, marginVertical: 12}} />}
        {Past == true ? <View style = {{flexDirection : 'row'}}><Text style = {{color : '#364f6b' , width: 300, fontWeight : 'bold', fontSize : 25, borderWidth: 3, borderColor: '#98fb98', borderRadius: 15, backgroundColor : '#fff',  marginVertical: 20, textAlign : 'left'}}>  <Ionicons name="timer" size={32} color="green" /> Past Request{"\n"}  <AntDesign name="calendar" size={24} color="black" />  {date2}{'\n'}  <Entypo name="location" size={24} color="black" />  {Street2}{'\n'}  <MaterialIcons name="book-online" size={24} color="black" />  {Status2} {'\n'}  <Entypo name="wallet" size={24} color="black" />  PKR {Fare2}</Text></View> :  <Image source={{uri : "https://i.ibb.co/hsqMvdn/display.png"}} style={{ width: 300, height: 200, marginVertical: 12}} />}    
           

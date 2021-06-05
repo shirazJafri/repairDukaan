@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
-import { StyleSheet, CheckBox, StatusBar, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, CheckBox, StatusBar, SafeAreaView, Text, TouchableOpacity, View, TextInput } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import axios from 'axios';
 
 
 export default function Report() {
+  const [text, onChangeText] = React.useState("");
 
-    const [isSelected1, setSelection1] = useState(false);
+    /*const [isSelected1, setSelection1] = useState(false);
     const [isSelected2, setSelection2] = useState(false);
     const [isSelected3, setSelection3] = useState(false);
     const [isSelected4, setSelection4] = useState(false);
@@ -15,10 +16,10 @@ export default function Report() {
     var title1 = "Mechanic's demanour was inappropriate";
     var title2 = "Mechanic charged extra for the service";
     var title3 = "Mechanic arrived late with no plausible reason";
-    var title4 = "Mechanic was ill-skilled for the task at hand";
+    var title4 = "Mechanic was ill-skilled for the task at hand";*/
 
     
-      const Toggle_checkbox=()=>{
+      /*const Toggle_checkbox=()=>{
 
 
         if (isSelected1 == true){
@@ -100,9 +101,37 @@ export default function Report() {
              catch (err) {
               console.error(err.message);
             }
-          };
+          };*/
       
-      
+          const handleLogIn = async () => {
+            const body = {Complain1: text}
+            try {
+               await fetch( 
+                "https://enigmatic-mesa-42065.herokuapp.com/report/register",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-type": "application/json"
+                  },
+                  body: JSON.stringify(body)
+                }
+              ).then((response) => response.json())
+              .then((responseJson) => {
+                console.log(responseJson)
+              if (responseJson.header.message === 'Booking added!') {
+                onChangeText("")
+                console.log("Complaint filed successfully");
+              }
+              else {
+                return(
+                  Alert.alert("Complaint Filed Unsuccessful")
+                )
+              }
+            })}
+             catch (err) {
+              console.error(err.message);
+            }
+          }
 
 
 
@@ -118,8 +147,22 @@ export default function Report() {
 
 
     <View style={styles.container}>
-      
+
     <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "white" translucent = {true}/>
+
+<Text style = {{color : 'white' , fontSize : 27, fontFamily: 'sans-serif-light', fontStyle: 'normal', borderColor: '#f4511e', width : 300, borderWidth: 2, borderRadius: 50, marginVertical: 10, backgroundColor: '#f4511e', textAlign : 'center'}}>REPORT</Text>
+    <TextInput
+        style={styles.input}
+        onChangeText={onChangeText}
+        value={text}
+        placeholder = "Enter Your Complain Here"
+      />
+
+<TouchableOpacity style={styles.submit} onPress = {() => handleLogIn()}>
+            <Text style={{color:"white", fontWeight: 'bold', fontSize : 20, }}>SUBMIT</Text>
+  </TouchableOpacity>
+      
+    {/*<StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "white" translucent = {true}/>
 
       <Text style = {{color : 'white' , fontSize : 27, fontFamily: 'sans-serif-light', fontStyle: 'normal', borderColor: '#f4511e', width : 300, borderWidth: 2, borderRadius: 50, marginVertical: 10, backgroundColor: '#f4511e', textAlign : 'center'}}>REPORT</Text>
       
@@ -168,7 +211,7 @@ export default function Report() {
 
       <TouchableOpacity style={styles.submit} onPress = {() => Toggle_checkbox()}>
             <Text style={{color:"white", fontWeight: 'bold', fontSize : 20, }}>SUBMIT</Text>
-        </TouchableOpacity>
+  </TouchableOpacity>*/}
       
   
 
@@ -254,5 +297,15 @@ lineStyle2:{
     marginBottom:30,
     marginVertical: 10,
     textAlign: 'center'
-  }
+  },
+  input: {
+    height: 400,
+    margin: 12,
+    borderColor: "black",
+    borderWidth: 2,
+    width: 300,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 20
+  },
 });
