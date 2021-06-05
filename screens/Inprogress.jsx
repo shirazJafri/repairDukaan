@@ -8,7 +8,7 @@ const Inprogress = ({route,navigation}) => {
     const handleArrived = async() =>{
         // console.log("hello")
           await axios.post('https://enigmatic-mesa-42065.herokuapp.com/user/status',{repair_id}).then((res) =>{
-             if(res.data.status == "Completed"){
+             if(res.data.body.status == "Completed"){
               setMove(true)
             }
           }).catch((err) => {

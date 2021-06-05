@@ -18,8 +18,6 @@ export default function Report() {
     var title4 = "Mechanic was ill-skilled for the task at hand";
 
     
-    
-
       const Toggle_checkbox=()=>{
 
 
@@ -50,7 +48,7 @@ export default function Report() {
 
 
        
-      handleLogIn();
+      //handleLogIn();
 
       Alert.alert(
         "REPORT",
@@ -77,9 +75,9 @@ export default function Report() {
       
           const handleLogIn = async () => {
             try {
-              const body = { title1, title2, title3, title4};
+              const body = { Complain1: title1, Complain2: title2, Complain3: title3, Complain4: title4 };
                await fetch( 
-                "http://192.168.8.100:3000/report/register",
+                "https://enigmatic-mesa-42065.herokuapp.com/report/register",
                 {
                   method: "POST",
                   headers: {
@@ -89,13 +87,13 @@ export default function Report() {
                 }
               ).then((response) => response.json())
               .then((responseJson) => {
-              if (responseJson.status === 'success') {
-                console.log("Registration successful");
+              if (responseJson.body.status === 'success') {
+                console.log("Complaint filed successfully");
                 setRegSucc(true);
               }
               else {
                 return(
-                  Alert.alert(responseJson)
+                  Alert.alert("Complaint Filed Unsuccessful")
                 )
               }
             })}

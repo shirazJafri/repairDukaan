@@ -9,14 +9,14 @@ export default function RegisterScreen({navigation}) {
   const [lname,setLname] = useState("");
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
-  const [number,setNumber] = useState(null);
+  const [number,setNumber] = useState("");
   const [regsucc,setRegSucc] = useState(false);
   const [log,setlog] = useState(false);
   const onSubmitForm = async () => {
       try {
         const body = { fname, email, lname, password,number};
          await fetch( 
-          "http://192.168.1.108:3000/signup/customer",
+          "https://enigmatic-mesa-42065.herokuapp.com/signup/customer",
           {
             method: "POST",
             headers: {
@@ -27,13 +27,13 @@ export default function RegisterScreen({navigation}) {
         ).then((response) => response.json())
         .then((responseJson) => {
        // console.log();
-        if (responseJson.status === 'success') {
+        if (responseJson.header.message === 'success') {
           console.log("Registration successful");
           setRegSucc(true);
         }
         else {
           return(
-            Alert.alert(responseJson)
+            Alert.alert("Registration Unsuccessful!")
           )
         }
       })}
@@ -48,33 +48,34 @@ export default function RegisterScreen({navigation}) {
         console.error(err.message);
       }
     };
-    // if(regsucc==true){
-    //   return (
-    //     <SafeAreaView
-    //       style={styles.container}>
-    //       <Image
-    //         source={require('../assets/success.png')}
-    //         style={{
-    //           height: 200,
-    //           width:200,
-    //           resizeMode: 'contain',
-    //           alignSelf: 'center'
-    //         }}
-    //       />
-    //       <Text style={styles.successTextStyle}>
-    //         Registration Successful
-    //       </Text>
-    //       <TouchableOpacity
-    //         style={styles.buttonStyle}
-    //         activeOpacity={0.5}
-    //         onPress={() =>{//setlog(true)
-    //         navigation.navigate('LogIn')
-    //         setRegSucc(false)}}>
-    //         <Text style={styles.buttonTextStyle}>Login Now</Text>
-    //       </TouchableOpacity>
-    //     </SafeAreaView>
-    //   );
-    // }
+    if(regsucc==true){
+      return (
+        <SafeAreaView
+          style={styles.container2}>
+          <Image
+            source={require('../assets/success.png')}
+            style={{
+              height: 300,
+              width:300,
+              resizeMode: 'contain',
+              alignSelf: 'center',
+              marginTop: 100
+            }}
+          />
+          <Text style={styles.successTextStyle}>
+            Registration Successful
+          </Text>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            activeOpacity={0.5}
+            onPress={() =>{//setlog(true)
+            navigation.navigate('LogIn')
+            setRegSucc(false)}}>
+            <Text style={styles.buttonTextStyle}>Login Now</Text>
+          </TouchableOpacity>
+        </SafeAreaView>
+      );
+    }
     return(       
       <SafeAreaView style={styles.container}>
     <Text style= {styles.logo}>Registration</Text>
@@ -85,7 +86,7 @@ export default function RegisterScreen({navigation}) {
           placeholder="First Name"
           name="fname"
           textAlign="center"
-          placeholderTextColor="#B5B5B5"
+          placeholderTextColor="white"
         />
           </View>
         <View style = {styles.inputView}>
@@ -95,7 +96,7 @@ export default function RegisterScreen({navigation}) {
           placeholder="Last Name"
           name="lname"
           textAlign="center"
-          placeholderTextColor="#B5B5B5"
+          placeholderTextColor="white"
         />
         </View>
 
@@ -106,7 +107,7 @@ export default function RegisterScreen({navigation}) {
           onChangeText={text=>setEmail(text)}
           name="email"
           textAlign="center"
-          placeholderTextColor="#B5B5B5"
+          placeholderTextColor="white"
         />
 </View>
         
@@ -117,7 +118,7 @@ export default function RegisterScreen({navigation}) {
           onChangeText={text=>setNumber(text)}
           name="number"
           placeholder="+92-XXXXX-XXX"
-          placeholderTextColor="#B5B5B5"
+          placeholderTextColor="white"
           keyboardType="numeric"
           textAlign="center"
         />
@@ -130,7 +131,7 @@ export default function RegisterScreen({navigation}) {
           placeholder="Password"
           onChangeText={text=>setPassword(text)}
           name="password"
-          placeholderTextColor="#B5B5B5"
+          placeholderTextColor="white"
           textContentType="password"
           textAlign="center"
           secureTextEntry={true}
@@ -224,7 +225,7 @@ export default function RegisterScreen({navigation}) {
   const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#003f5c',
+        backgroundColor: 'aliceblue',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -263,5 +264,38 @@ export default function RegisterScreen({navigation}) {
       activity: {
         flex: 1,
         justifyContent: "center"
-      }
+      },
+      buttonStyle: {
+            backgroundColor: '#7DE24E',
+            borderWidth: 0,
+            color: '#FFFFFF',
+            borderColor: '#7DE24E',
+            height: 50,
+            width:120,
+            alignItems: 'center',
+            borderRadius: 30,
+            marginLeft: 35,
+            marginRight: 35,
+            marginTop: 20,
+            marginBottom: 20,
+          },
+          buttonTextStyle: {
+                color: '#FFFFFF',
+                paddingVertical: 10,
+                fontSize: 20,
+                textAlign: 'center'
+              },
+              successTextStyle: {
+                    color: 'green',
+                    textAlign: 'center',
+                    fontSize: 30,
+                    padding: 30,
+                  },
+                  container2: {
+                      flex: 1,
+                      backgroundColor: '#fff',
+                      alignItems: 'center',
+                      textAlign: 'center',
+                      color: 'aliceblue'
+                    }
 })

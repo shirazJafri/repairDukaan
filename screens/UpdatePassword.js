@@ -9,7 +9,7 @@ function UpdatePassword({ authState, navigation, loggingOut }) {
     const [newPassword, setNewPassword] = useState("")
 
     const handleUpdatePassword = async () => {
-        await axios.post("http://192.168.1.108:3000/api/customer/change", {currentPassword, newPassword}, {
+        await axios.post("https://enigmatic-mesa-42065.herokuapp.com/api/customer/change", {currentPassword, newPassword}, {
             headers: {
                 "token": authState.token
             }
@@ -17,7 +17,6 @@ function UpdatePassword({ authState, navigation, loggingOut }) {
         .then((response) => {
             Alert.alert('Change of Password Successful! Please re-login!')
             loggingOut()
-            console.log(response.data.message);
             navigation.navigate('LogIn')
         })
         .catch((error) => {
@@ -34,7 +33,7 @@ function UpdatePassword({ authState, navigation, loggingOut }) {
                     style={styles.inputText}
                     value = {currentPassword}
                     placeholder = 'Current Password'
-                    placeholderTextColor="#003f5c"
+                    placeholderTextColor="white"
                     onChangeText={setCurrentPassword}
                     secureTextEntry = {true}
                 />
@@ -44,7 +43,7 @@ function UpdatePassword({ authState, navigation, loggingOut }) {
                     style={styles.inputText}
                     value = {newPassword}
                     placeholder = 'New Password'
-                    placeholderTextColor="#003f5c"
+                    placeholderTextColor="white"
                     onChangeText={setNewPassword}
                     secureTextEntry = {true}
                 />
@@ -62,7 +61,7 @@ function UpdatePassword({ authState, navigation, loggingOut }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#003f5c',
+        backgroundColor: 'aliceblue',
         alignItems: 'center',
         justifyContent: 'center',
     },

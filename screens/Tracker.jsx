@@ -24,7 +24,7 @@ const Tracker = ({route,navigation}) => {
   const [move,setMove] = useState(false);
   const getname = async() =>{
     await axios.post('https://enigmatic-mesa-42065.herokuapp.com/worker/info',{worker_id}).then((res) =>{
-     setWname(res.data.first_name);
+     setWname(res.data.body.first_name);
      // console.log(res.data);
     }).catch((err) => {
          console.log(err);
@@ -33,7 +33,7 @@ const Tracker = ({route,navigation}) => {
   const handleArrived = async() =>{
    //console.log("hello")
      await axios.post('https://enigmatic-mesa-42065.herokuapp.com/user/status',{repair_id}).then((res) =>{
-       if(res.data.status == "Repair Started"){
+       if(res.data.body.status == "Repair Started"){
          setMove(true);
         }
      }).catch((err) => {

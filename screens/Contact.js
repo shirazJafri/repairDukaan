@@ -16,12 +16,12 @@ export default function Contact() {
   
   const handleLogIn = async () => {
     
-        await axios.get('http://192.168.1.108:3000/getContact/60b69a241b104129505a89ad', {
+        await axios.get('https://enigmatic-mesa-42065.herokuapp.com/getContact/60b69a241b104129505a89ad', {
         })
         .then((response) => {
-            setemail(response.data.Email)
-            setaddress(response.data.Address)
-            setphone(response.data.Phone)
+            setemail(response.data.body.Email)
+            setaddress(response.data.body.Address)
+            setphone(response.data.body.Phone)
             //Alert.alert(response)
             console.log(response);
         })

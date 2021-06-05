@@ -34,7 +34,7 @@ function UpdateProfile({ authState, userState, navigation, getInfo }) {
     }*/
 
     const handleUpdate =   () => {
-        axios.put(`http://192.168.1.108:3000/api/user/updateprofile/${userState.userInfo.id}`, {firstName, lastName, phoneNumber})
+        axios.put(`https://enigmatic-mesa-42065.herokuapp.com/api/user/updateprofile/${userState.userInfo.id}`, {firstName, lastName, phoneNumber})
         .then((response) => {
             console.log(response)
             Alert.alert("Sucessful update!")
@@ -57,7 +57,7 @@ function UpdateProfile({ authState, userState, navigation, getInfo }) {
                     style={styles.inputText}
                     value = {firstName}
                     placeholder = 'First Name'
-                    placeholderTextColor="#003f5c"
+                    placeholderTextColor="white"
                     onChangeText={setFirstName}
                 />
             </View>
@@ -66,7 +66,7 @@ function UpdateProfile({ authState, userState, navigation, getInfo }) {
                     style={styles.inputText}
                     value = {lastName}
                     placeholder = 'Last Name'
-                    placeholderTextColor="#003f5c"
+                    placeholderTextColor="white"
                     onChangeText={setLastName}
                 />
             </View>
@@ -75,7 +75,7 @@ function UpdateProfile({ authState, userState, navigation, getInfo }) {
                     style={styles.inputText}
                     value = {phoneNumber}
                     placeholder = 'Phone Number'
-                    placeholderTextColor="#003f5c"
+                    placeholderTextColor="white"
                     onChangeText={setPhoneNumber}
                     keyboardType = 'number-pad'
                 />
@@ -93,7 +93,7 @@ function UpdateProfile({ authState, userState, navigation, getInfo }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#003f5c',
+        backgroundColor: 'aliceblue',
         alignItems: 'center',
         justifyContent: 'center',
     },

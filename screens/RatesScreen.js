@@ -6,10 +6,10 @@ function RatesScreen() {
     const [ratesList, setRatesList] = useState()
 
     useEffect(() => {
-        axios.get('http://192.168.1.108:3000/api/rates/get')
+        axios.get('https://enigmatic-mesa-42065.herokuapp.com/api/rates/get')
             .then((response) => {
                 console.log(response)
-                setRatesList(response.data.data.rates)
+                setRatesList(response.data.body.rates)
             })
             .catch((error) => {
                 console.log(error)
@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
       },
       name: {
         borderColor: '#364f6b',
-        fontFamily: 'Verdana',
         fontSize: 30,
         color: '#364f6b',
         fontWeight: 'bold',

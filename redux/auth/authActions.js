@@ -32,7 +32,7 @@ export const signIn = (email, password) => {
         console.log(email, password)
         axios.post('https://enigmatic-mesa-42065.herokuapp.com/login/customer', {email, password})
             .then((response) => {
-                dispatch(signInSuccess(response.data.token))
+                dispatch(signInSuccess(response.data.body.token))
             })
             .catch((error) => {
                 dispatch(signInFailure(error.message))

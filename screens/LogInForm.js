@@ -2,16 +2,21 @@ import React, { useEffect } from "react"
 import {Text, View, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, ActivityIndicator, ToastAndroid} from "react-native"
 import { useState } from "react"
 import { connect } from "react-redux"
-import {signIn} from '../redux'
+import {signIn, signOut} from '../redux'
 import { Alert } from "react-native"
 
-function LogInForm( {authState, logIn, navigation} ) {
+function LogInForm( {authState, logIn, logOut, navigation} ) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     console.log(authState)
 
     if (!authState.loading && authState.token) {
       navigation.navigate('SplashScreen')
+    }
+    else if (!authState.loading && authState.error) {
+      Alert.alert("Log-In was unsuccessful!")
+      logOut()
+      navigation.navigate('LogIn')
     }
 
     return authState.loading ? (
@@ -25,7 +30,7 @@ function LogInForm( {authState, logIn, navigation} ) {
           <TextInput  
             style={styles.inputText}
             placeholder="Email" 
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="white"
             onChangeText = {setEmail}
             keyboardType = 'email-address'
           />
@@ -34,17 +39,18 @@ function LogInForm( {authState, logIn, navigation} ) {
           <TextInput  
             style={styles.inputText}
             placeholder="Password" 
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="white"
             secureTextEntry = {true}
             onChangeText = {setPassword}
           />
       </View>
       <TouchableOpacity style={styles.loginBtn} onPress = {() => logIn(email, password)}>
-          <Text style={styles.loginText}>LOGIN</Text>
+          <Text style={styles.loginText}>LOG-IN</Text>
       </TouchableOpacity>
 
+      <Text style={{fontSize: 16, color: '#465881', fontWeight: 'bold'}}>DON'T HAVE AN ACCOUNT?</Text>
       <TouchableOpacity onPress = {() => navigation.navigate('RegisterScreen')}>
-          <Text style={styles.loginText}>Sign Up</Text>
+        <Text style={{fontSize: 18, color: '#f4511e', fontWeight: 'bold', marginVertical: 10, textAlign: 'center'}}>REGISTER NOW</Text>
       </TouchableOpacity>
       </SafeAreaView>
     )
@@ -59,7 +65,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      logIn: (email, password) => dispatch(signIn(email, password))
+      logIn: (email, password) => dispatch(signIn(email, password)),
+      logOut: () => dispatch(signOut())
   }
 }
 
@@ -67,7 +74,7 @@ const mapDispatchToProps = dispatch => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#003f5c',
+        backgroundColor: 'aliceblue',
         alignItems: 'center',
         justifyContent: 'center',
     },

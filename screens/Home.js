@@ -51,8 +51,8 @@ function Home({ authState, userState, navigation }) {
   const handleArrived = async() =>{
     //  ("hello")
       await axios.post('https://enigmatic-mesa-42065.herokuapp.com/user/status',{repair_id}).then((res) =>{
-          setStatus(res.data.status)
-          if (res.data.status == "Completed" || res.data.status == "Cancelled"){
+          setStatus(res.data.body.status)
+          if (res.data.body.status == "Completed" || res.data.body.status == "Cancelled"){
             setCurrent(false)
           }
           
@@ -87,7 +87,7 @@ function Home({ authState, userState, navigation }) {
         await axios.get(`https://enigmatic-mesa-42065.herokuapp.com/repair/get/${userState.userInfo.id}`, {
         })
         .then((response) => {
-          var data = response.data;
+          var data = response.data.body;
           console.log(data);
           for (var i = 0; i < data.length; i++){
             if (data[i].status == "Completed" || data[i].status == "Cancelled"){
@@ -144,7 +144,7 @@ function Home({ authState, userState, navigation }) {
      {ButtonS == true ? <TouchableOpacity onPress={() => {}}   style={styles.button}>
          <Text style={styles.buttonText}>BOOK NOW</Text>
        </TouchableOpacity> : null}
-       {Current == true ? <View style = {{flexDirection : 'row'}}><TouchableOpacity onPress={() =>{}}><Text style = {{color : '#364f6b' , width: 300, fontWeight : 'bold', fontSize : 25, borderWidth: 3, borderColor: '#3cb371', borderRadius: 15, backgroundColor : '#fff', marginVertical: 20, textAlign : 'left'}}>  <Ionicons name="timer" size={32} color="green" /> Current Request {"\n"}  <AntDesign name="calendar" size={24} color="black" />  {date} {'\n'}  <Entypo name="location" size={24} color="black" />  {Street1} {'\n'}  <MaterialIcons name="book-online" size={24} color="black" />  {Status} {'\n'}  <Entypo name="wallet" size={24} color="black" />  EXPECTED PKR {Fare}</Text></TouchableOpacity></View> : <Image source={{uri : "https://i.ibb.co/GQqWh2K/appdev1.png"}} style={{ width: 300, height: 175, marginVertical: 12}} />}
+       {Current == true ? <View style = {{flexDirection : 'row'}}><TouchableOpacity onPress={() =>navigation.navigate('Map')}><Text style = {{color : '#364f6b' , width: 300, fontWeight : 'bold', fontSize : 25, borderWidth: 3, borderColor: '#3cb371', borderRadius: 15, backgroundColor : '#fff', marginVertical: 20, textAlign : 'left'}}>  <Ionicons name="timer" size={32} color="green" /> Current Request {"\n"}  <AntDesign name="calendar" size={24} color="black" />  {date} {'\n'}  <Entypo name="location" size={24} color="black" />  {Street1} {'\n'}  <MaterialIcons name="book-online" size={24} color="black" />  {Status} {'\n'}  <Entypo name="wallet" size={24} color="black" />  EXPECTED PKR {Fare}</Text></TouchableOpacity></View> : <Image source={{uri : "https://i.ibb.co/GQqWh2K/appdev1.png"}} style={{ width: 300, height: 175, marginVertical: 12}} />}
        {Past == true ? <View style = {{flexDirection : 'row'}}><Text style = {{color : '#364f6b' , width: 300, fontWeight : 'bold', fontSize : 25, borderWidth: 3, borderColor: '#98fb98', borderRadius: 15, backgroundColor : '#fff',  marginVertical: 20, textAlign : 'left'}}>  <Ionicons name="timer" size={32} color="green" /> Past Request{"\n"}  <AntDesign name="calendar" size={24} color="black" />  {date2}{'\n'}  <Entypo name="location" size={24} color="black" />  {Street2}{'\n'}  <MaterialIcons name="book-online" size={24} color="black" />  {Status2} {'\n'}  <Entypo name="wallet" size={24} color="black" />  PKR {Fare2}</Text></View> :  <Image source={{uri : "https://i.ibb.co/hsqMvdn/display.png"}} style={{ width: 300, height: 200, marginVertical: 12}} />}    
           
        

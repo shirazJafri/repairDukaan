@@ -24,17 +24,17 @@ const fetchUserFailure = error => {
 export const getUserInfo = (token) => {
     return (dispatch) => {
         dispatch(fetchUserRequest())
-        axios.get("http://192.168.1.108:3000/api/customer/getprofile", {
+        axios.get("https://enigmatic-mesa-42065.herokuapp.com/api/customer/getprofile", {
                 headers: {
                     "token": token
                 }
             })
             .then((response) => {
                 console.log(response)
-                dispatch(fetchUserSuccess(response.data))
+                dispatch(fetchUserSuccess(response.data.body))
             })
             .catch((error) => {
-                dispatch(fetchUserFailure(response.message))
+                dispatch(fetchUserFailure(error.message))
             })
     }
 }

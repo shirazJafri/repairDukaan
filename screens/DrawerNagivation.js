@@ -50,10 +50,8 @@ function ContactStack({ navigation }) {
         name="Contact"
         component={Contact}
         options={{
-          title: <Image
-          source={{ uri: "https://i.ibb.co/TqTc6Sz/56780962d5e54ef2b180166b12b44915.png"}}
-          style = {{width : 70, height : 70}}
-        />, //Set Header Title
+          title : 'REPAIR DUKAAN  '
+        , //Set Header Title
           headerLeft: () => (
             <NavigationDrawerStructure navigationProps={navigation} />
           ),
@@ -64,7 +62,8 @@ function ContactStack({ navigation }) {
           headerTitleStyle: {
             fontWeight: 'bold',
             textAlign : 'center', //Set Header text style
-            fontSize: 24
+            fontSize: 26,
+            marginRight: 30,
           },
         }}
       />
@@ -78,11 +77,8 @@ function HowToUseStack({ navigation }) {
         name="How To Use"
         component={HowToUse}
         options={{
-          title: <Image
-    
-          source={{ uri: "https://i.ibb.co/TqTc6Sz/56780962d5e54ef2b180166b12b44915.png"}}
-          style = {{width : 70, height : 70}}
-        />, //Set Header Title
+          title : 'REPAIR DUKAAN  '
+        , //Set Header Title
           headerLeft: () => (
             <NavigationDrawerStructure navigationProps={navigation} />
           ),
@@ -93,7 +89,8 @@ function HowToUseStack({ navigation }) {
           headerTitleStyle: {
             fontWeight: 'bold',
             textAlign : 'center', //Set Header text style
-            fontSize: 24
+            fontSize: 26,
+            marginRight: 30,
           },
         }}
       />
@@ -107,11 +104,8 @@ function RatesStack({ navigation }) {
         name="Rates"
         component={Rates}
         options={{
-          title: <Image
-    
-          source={{ uri: "https://i.ibb.co/TqTc6Sz/56780962d5e54ef2b180166b12b44915.png"}}
-          style = {{width : 70, height : 70}}
-        />, //Set Header Title
+          title : 'REPAIR DUKAAN  '
+        , //Set Header Title
           headerLeft: () => (
             <NavigationDrawerStructure navigationProps={navigation} />
           ),
@@ -122,7 +116,8 @@ function RatesStack({ navigation }) {
           headerTitleStyle: {
             fontWeight: 'bold',
             textAlign : 'center', //Set Header text style
-            fontSize: 42
+            fontSize: 26,
+            marginRight: 30,
           },
         }}
       />
@@ -136,11 +131,8 @@ function ReportStack({ navigation }) {
         name="Report"
         component={Report}
         options={{
-          title: <Image
-    
-          source={{ uri: "https://i.ibb.co/TqTc6Sz/56780962d5e54ef2b180166b12b44915.png"}}
-          style = {{width : 70, height : 70}}
-        />, //Set Header Title
+          title : 'REPAIR DUKAAN  '
+        , //Set Header Title
           headerLeft: () => (
             <NavigationDrawerStructure navigationProps={navigation} />
           ),
@@ -151,7 +143,8 @@ function ReportStack({ navigation }) {
           headerTitleStyle: {
             fontWeight: 'bold',
             textAlign : 'center', //Set Header text style
-            fontSize: 24
+            fontSize: 26,
+            marginRight: 30,
           },
         }}
       />
@@ -172,7 +165,8 @@ const MapStackScreen = ({navigation}) => (
           headerTitleStyle: {
             fontWeight: 'bold',
             textAlign : 'center', //Set Header text style
-            fontSize: 24
+            fontSize: 26,
+            marginRight: 30,
           },
           }} />
                 <MapStack.Screen name="Tracker"  component = {Tracker} options={{
@@ -187,7 +181,8 @@ const MapStackScreen = ({navigation}) => (
           headerTitleStyle: {
             fontWeight: 'bold',
             textAlign : 'center', //Set Header text style
-            fontSize: 24
+            fontSize: 26,
+            marginRight: 30,
           },
           }} />
           <MapStack.Screen name="Inprogress"  component = {Inprogress} options={{
@@ -202,7 +197,8 @@ const MapStackScreen = ({navigation}) => (
           headerTitleStyle: {
             fontWeight: 'bold',
             textAlign : 'center', //Set Header text style
-            fontSize: 24
+            fontSize: 26,
+            marginRight: 30,
           },
           }} />
   </MapStack.Navigator>
@@ -228,11 +224,21 @@ function HomeStack({ navigation }) {
         name="Home"
         component={Home}
         options={{
-          title: <Image
-    
-          source={{ uri: "https://i.ibb.co/pRmWNRX/logo.png"}}
-          style = {{width : 100, height : 100, marginBottom: 15}}
-        />, //Set Header Title
+          title : 'REPAIR DUKAAN  '
+        , //Set Header Title
+          headerLeft: () => (
+            <NavigationDrawerStructure navigationProps={navigation} />
+          ),
+          headerStyle: {
+            backgroundColor: '#f4511e', //Set Header color
+          },
+          headerTintColor: '#fff', //Set Header text color
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            textAlign : 'center', //Set Header text style
+            fontSize: 26,
+            marginRight: 30,
+          },
         }}
       />
     </Stack.Navigator>
@@ -259,11 +265,21 @@ function ProfileStack({ navigation }) {
         name="Profile"
         component={Profile}
         options={{
-          title: <Image
-    
-          source={{ uri: "https://i.ibb.co/TqTc6Sz/56780962d5e54ef2b180166b12b44915.png"}}
-          style = {{width : 70, height : 70}}
-        />, //Set Header Title
+          title : 'REPAIR DUKAAN  '
+        , //Set Header Title
+          headerLeft: () => (
+            <NavigationDrawerStructure navigationProps={navigation} />
+          ),
+          headerStyle: {
+            backgroundColor: '#f4511e', //Set Header color
+          },
+          headerTintColor: '#fff', //Set Header text color
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            textAlign : 'center', //Set Header text style
+            fontSize: 26,
+            marginRight: 30,
+          },
         }}
       />
     </Stack.Navigator>
